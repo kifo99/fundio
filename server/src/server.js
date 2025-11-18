@@ -1,16 +1,11 @@
 import express from "express";
+import dotenv from "dotenv";
 
-const PORT = 8080;
-const app = express();
+import app from "./app.js";
+dotenv.config({ path: "./.env" });
 
+const port = process.env.PORT;
 
-app.get('/', (req,res,next) => {
-    res.send("Hello World my dreind");
-})
-
-app.listen(PORT, () => {
-    console.log(`This server is connected on port ${PORT}`);
-})
-
-
-export default app;
+app.listen(port, () => {
+  console.log(`This server is connected on port ${port}`);
+});
