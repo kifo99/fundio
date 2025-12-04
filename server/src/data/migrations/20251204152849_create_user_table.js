@@ -1,0 +1,17 @@
+export const up = async function (knex) {
+  await knex.schema.createTable('users', (table) => {
+    table.increments('id').primary();
+    table.string('firstName').notNullable();
+    table.string('lastName').notNullable();
+    table.string('email').notNullable().unique();
+    table.string('password').notNullable();
+    table.timestamp('createdAt').defaultTo(knex.fn.now());
+    table.string('profilePic');
+    table.specificType('role', 'user_role').notNullable().defaultTo('User');
+  });
+};
+
+export const down = async function (knex) {
+  await knex.schema.dropTable('user');
+  await knex.raw(`DROP TYPE user_role`);
+};

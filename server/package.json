@@ -5,19 +5,22 @@
   "type": "module",
   "main": "./src/server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon ./src/server.js",
+    "setup:sql": "node ./src/helpers/runSqlFiles.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "^7.0.0",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
-    "prisma": "^7.0.0"
+    "knex": "^3.1.0",
+    "objection": "^3.1.5",
+    "pg": "^8.16.3",
+    "sequelize": "^6.37.7"
   },
   "devDependencies": {
     "@types/node": "^24.10.1",
@@ -26,7 +29,6 @@
     "helmet": "^8.1.0",
     "morgan": "^1.10.1",
     "nodemon": "^3.1.11",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.9.3"
+    "prisma": "^7.1.0"
   }
 }
