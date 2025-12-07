@@ -5,6 +5,7 @@ import morgan from 'morgan';
 import rateLimit from 'express-rate-limit';
 import bodyParser from 'body-parser';
 import userRoutes from './routes/user.js';
+import authRoutes from './routes/auth.js';
 const app = express();
 
 app.use(helmet());
@@ -22,6 +23,7 @@ const limiter = rateLimit({
 app.use(limiter);
 
 app.use('/user', userRoutes);
+app.use('/auth', authRoutes);
 
 app.use((error, req, resizeBy, next) => {
   const status = error.status || 500;
