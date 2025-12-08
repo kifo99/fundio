@@ -2,8 +2,8 @@ import User from '../data/models/User.js';
 import { validationResult } from 'express-validator';
 import bcrypt from 'bcrypt';
 
-// TODO Create signin function
-export async function signin(req, res, next) {
+// TODO Create signup function
+export async function signup(req, res, next) {
   try {
     const { firstName, lastName, email, password } = req.body;
     const errors = validationResult(req);

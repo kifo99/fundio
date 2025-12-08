@@ -1,11 +1,11 @@
 import express from 'express';
 import { body } from 'express-validator';
 import User from '../data/models/User.js';
-import { signin } from '../controllers/auth.js';
+import { signup } from '../controllers/auth.js';
 const route = express.Router();
 
 route.put(
-  '/signin',
+  '/signup',
   [
     body('firstName').trim().not().isEmpty().withMessage('Invalid first name!'),
     body('lastName').trim().not().isEmpty().withMessage('Invalid last name!'),
@@ -46,7 +46,7 @@ route.put(
         return true;
       }),
   ],
-  signin
+  signup
 );
 
 export default route;

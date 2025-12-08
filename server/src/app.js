@@ -6,6 +6,7 @@ import rateLimit from 'express-rate-limit';
 import bodyParser from 'body-parser';
 import userRoutes from './routes/user.js';
 import authRoutes from './routes/auth.js';
+import uploadRouter from './routes/uploads.js';
 const app = express();
 
 app.use(helmet());
@@ -24,8 +25,9 @@ app.use(limiter);
 
 app.use('/user', userRoutes);
 app.use('/auth', authRoutes);
+app.use('/upload', uploadRouter);
 
-app.use((error, req, resizeBy, next) => {
+app.use((error, req, res, next) => {
   const status = error.status || 500;
   const message = error.message || 'There has been an error. Please try again.';
   const data = error.data;
@@ -34,7 +36,7 @@ app.use((error, req, resizeBy, next) => {
     console.error('Invalid status code!');
   }
 
-  resizeBy.status(status).json({
+  res.status(status).json({
     message: message,
     data: data,
   });
