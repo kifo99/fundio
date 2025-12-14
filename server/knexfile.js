@@ -1,11 +1,12 @@
 import 'dotenv/config';
 
+const url = process.env.NODE_ENV === 'development' ? process.env.DATABASE_URL_DEV : process.env.DATABASE_URL_PROD;
 console.log(process.env.DATABASE_URL);
 export default {
   development: {
     client: 'pg',
     connection: {
-      connectionString: process.env.DATABASE_URL,
+      connectionString: url,
     },
     migrations: {
       directory: './src/data/migrations',
@@ -15,7 +16,7 @@ export default {
   production: {
     client: 'pg',
     connection: {
-      connectionString: process.env.DATABASE_URL,
+      connectionString: url,
     },
     pool: {
       min: 2,
