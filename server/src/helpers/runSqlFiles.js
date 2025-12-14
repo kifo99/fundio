@@ -1,7 +1,6 @@
 import fs from 'fs';
 import path from 'path';
 import knex from '../config/config.js';
-import { CLIENT_RENEG_LIMIT } from 'tls';
 
 export async function runSqlFiles() {
   const sqlDir = path.join('src', 'data', 'sql');
