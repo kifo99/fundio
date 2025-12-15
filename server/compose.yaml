@@ -1,7 +1,18 @@
-# services:
-#   backend:
-#     build: .
-#     ports:
-#       - '8080:8080'
-#   db:
-#     image: 'postgres:latest'
+services:
+  backend:
+    build: .
+    ports:
+      - '8080:8080'
+    command: npm start
+  database:
+    image: 'postgres:latest'
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: db
+    volumes:
+      - postgres_data:/var/lib/postgresql
+volumes:
+  postgres_data:
