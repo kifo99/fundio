@@ -1,7 +1,7 @@
 import express from 'express';
 import { body } from 'express-validator';
 import User from '../data/models/User.js';
-import { signup } from '../controllers/auth.js';
+import { signup, login } from '../controllers/auth.js';
 const route = express.Router();
 
 route.put(
@@ -48,5 +48,7 @@ route.put(
   ],
   signup
 );
+
+route.post('/login', login);
 
 export default route;

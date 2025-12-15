@@ -2,15 +2,17 @@ import User from '../data/models/User.js';
 import { validationResult } from 'express-validator';
 import bcrypt from 'bcrypt';
 
-// TODO Create signup function
+const salt = 12;
+
+// signup function
 export async function signup(req, res, next) {
   try {
     const { firstName, lastName, email, password } = req.body;
     const errors = validationResult(req);
+    const error = errors.formatWith((error) => error.msg);
+    if (!errors.isEmpty()) throw new Error(error.array());
 
-    if (!errors.isEmpty()) throw new Error('Validation not successful!');
-
-    const hashedPassword = await bcrypt.hash(password, 12);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
     const user = await User.query().insert({
       firstName: firstName,
@@ -33,6 +35,34 @@ export async function signup(req, res, next) {
 }
 
 // TODO Create login function
+export async function login(req, res, next) {
+  try {
+    const { email, password } = req.body;
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) throw new Error('There has been an error');
+
+    const user = await User.query().findOne({ email });
+
+    if (!user) throw new Error('User has not been found');
+
+    const decryptedPassword = await bcrypt.compare(password, user.password);
+
+    if (decryptedPassword)
+      res.status(200).json({
+        message: `Welcome: ${user.firstName}`,
+        user: user,
+      });
+
+    res.status(404).json({
+      message: 'Unable to login credentials do not match',
+    });
+  } catch (error) {
+    res.status(error.statusCode || 500).json({
+      message: error.message,
+    });
+  }
+}
 
 // TODO Create logout function
 
