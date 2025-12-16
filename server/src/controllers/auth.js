@@ -1,8 +1,8 @@
 import User from '../data/models/User.js';
 import { validationResult } from 'express-validator';
 import bcrypt from 'bcrypt';
-
-const salt = 12;
+import jwt from 'jsonwebtoken';
+import 'dotenv/config';
 
 // signup function
 export async function signup(req, res, next) {
@@ -12,7 +12,7 @@ export async function signup(req, res, next) {
     const error = errors.formatWith((error) => error.msg);
     if (!errors.isEmpty()) throw new Error(error.array());
 
-    const hashedPassword = await bcrypt.hash(password, salt);
+    const hashedPassword = await bcrypt.hash(password, process.env.SALT);
 
     const user = await User.query().insert({
       firstName: firstName,
@@ -34,7 +34,7 @@ export async function signup(req, res, next) {
   }
 }
 
-// TODO Create login function
+// Tlogin function
 export async function login(req, res, next) {
   try {
     const { email, password } = req.body;
@@ -48,11 +48,22 @@ export async function login(req, res, next) {
 
     const decryptedPassword = await bcrypt.compare(password, user.password);
 
-    if (decryptedPassword)
-      res.status(200).json({
-        message: `Welcome: ${user.firstName}`,
-        user: user,
-      });
+    if (!decryptedPassword) throw new Error('Wrong password!');
+
+    const token = jwt.sign(
+      {
+        email: user.email,
+        userId: user.id,
+      },
+      process.env.SECRET_KEY,
+      { expiresIn: '1h' }
+    );
+    res.status(200).json({
+      message: `Welcome: ${user.firstName}`,
+      token: token,
+      user: user,
+      userId: user.id,
+    });
 
     res.status(404).json({
       message: 'Unable to login credentials do not match',
@@ -65,5 +76,3 @@ export async function login(req, res, next) {
 }
 
 // TODO Create logout function
-
-// TODO Create Vendor login function
