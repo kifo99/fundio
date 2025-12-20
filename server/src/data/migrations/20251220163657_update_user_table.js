@@ -7,7 +7,7 @@ export const up = async function (knex) {
     table.string('password').notNullable();
     table.timestamp('createdAt').defaultTo(knex.fn.now());
     table.string('profilePic');
-    table.boolean('VendorVerified').defaultTo(false);
+    table.boolean('emailVerified').defaultTo(false);
     table.specificType('role', 'user_role').notNullable().defaultTo('user');
     table
       .specificType('vendorStatus', 'vendor_status')
