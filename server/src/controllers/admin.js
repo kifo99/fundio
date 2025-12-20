@@ -13,7 +13,7 @@ export async function verifyVendor(req, res, next) {
 
     await user.$query().patch({
       role: 'vendor',
-      VendorVerified: true,
+      emailVerified: true,
       vendorStatus: 'verified',
     });
 
