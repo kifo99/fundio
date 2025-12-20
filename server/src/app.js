@@ -7,6 +7,7 @@ import bodyParser from 'body-parser';
 import userRoutes from './routes/user.js';
 import authRoutes from './routes/auth.js';
 import uploadRouter from './routes/uploads.js';
+import adminRouter from './routes/admin.js';
 const app = express();
 
 app.use(helmet());
@@ -26,6 +27,7 @@ app.use(limiter);
 app.use('/user', userRoutes);
 app.use('/auth', authRoutes);
 app.use('/upload', uploadRouter);
+app.use('/admin', adminRouter);
 
 app.use((error, req, res, next) => {
   const status = error.status || 500;
