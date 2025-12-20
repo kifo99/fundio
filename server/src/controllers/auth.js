@@ -7,18 +7,39 @@ import 'dotenv/config';
 // signup function
 export async function signup(req, res, next) {
   try {
+    const path = req.path;
     const { firstName, lastName, email, password } = req.body;
     const errors = validationResult(req);
     const error = errors.formatWith((error) => error.msg);
     if (!errors.isEmpty()) throw new Error(error.array());
 
-    const hashedPassword = await bcrypt.hash(password, process.env.SALT);
+    const hashedPassword = await bcrypt.hash(
+      password,
+      Number(process.env.SALT)
+    );
+
+    if (!path.includes('vendor')) {
+      const user = await User.query().insert({
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: hashedPassword,
+      });
+
+      await Promise.all([user.$query().patch()]);
+
+      res.status(200).json({
+        message: 'User account is created successfully.',
+        user: user,
+      });
+    }
 
     const user = await User.query().insert({
       firstName: firstName,
       lastName: lastName,
       email: email,
       password: hashedPassword,
+      vendorStatus: 'pending',
     });
 
     await Promise.all([user.$query().patch()]);
@@ -34,7 +55,7 @@ export async function signup(req, res, next) {
   }
 }
 
-// Tlogin function
+// login function
 export async function login(req, res, next) {
   try {
     const { email, password } = req.body;
@@ -75,4 +96,54 @@ export async function login(req, res, next) {
   }
 }
 
-// TODO Create logout function
+// TODO Create signupVendor function
+
+// export async function signupVendor(req, res, next) {
+//   try {
+//     const path = req.path;
+//     const { firstName, lastName, email, password } = req.body;
+//     const errors = validationResult(req);
+//     const error = errors.formatWith((error) => error.msg);
+//     if (!errors.isEmpty()) throw new Error(error.array());
+
+//     const hashedPassword = await bcrypt.hash(
+//       password,
+//       Number(process.env.SALT)
+//     );
+
+//     if (!path.includes('vendor')) {
+//       const user = await User.query().insert({
+//         firstName: firstName,
+//         lastName: lastName,
+//         email: email,
+//         password: hashedPassword,
+//       });
+
+//       await Promise.all([user.$query().patch()]);
+
+//       res.status(200).json({
+//         message: 'User account is created successfully.',
+//         user: user,
+//       });
+//     }
+
+//     const user = await User.query().insert({
+//       firstName: firstName,
+//       lastName: lastName,
+//       email: email,
+//       password: hashedPassword,
+//       vendorStatus: 'pending',
+//     });
+
+//     await Promise.all([user.$query().patch()]);
+
+//     res.status(200).json({
+//       message: 'User account is created successfully.',
+//       user: user,
+//     });
+//   } catch (error) {
+//     res.status(error.statusCode || 500).json({
+//       message: `Error: ${error.message}`,
+//     });
+//   }
+// }

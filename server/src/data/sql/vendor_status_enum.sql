@@ -1,0 +1,1 @@
+CREATE TYPE vendor_status AS ENUM ('verified', 'unverified', 'pending', 'rejected');

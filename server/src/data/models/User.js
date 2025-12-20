@@ -1,3 +1,4 @@
+import { type } from 'node:os';
 import { Model } from 'objection';
 
 export default class User extends Model {
@@ -20,8 +21,14 @@ export default class User extends Model {
         lastName: { type: 'string' },
         email: { type: 'string', format: 'email' },
         password: { type: 'string' }, // needs to be stored hashed
+        role: { type: 'string', enum: ['user', 'admin', 'vendor'] },
         createdAt: { type: 'string', format: 'date-time' },
         profilePic: { type: 'string' },
+        emailVerified: { type: 'boolean' },
+        vendorStatus: {
+          type: 'string',
+          enum: ['unverified', 'verified', 'pending', 'rejected'],
+        },
       },
     };
   }
