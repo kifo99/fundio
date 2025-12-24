@@ -1,11 +1,11 @@
+import { Navigation } from './components/navigation/Navigation';
 
 function App() {
-
   return (
-      <div>
-        Hello World!!
-      </div>
-  )
+    <div>
+      <Navigation />
+    </div>
+  );
 }
 
-export default App
+export default App;
