@@ -7,11 +7,11 @@ import App from './App.jsx';
 const root = document.getElementById('root');
 
 createRoot(root).render(
-  // <BrowserRouter>
-  //   <App />
-  // </BrowserRouter>
-
-  <StrictMode>
+  <BrowserRouter>
     <App />
-  </StrictMode>
+  </BrowserRouter>
+
+  // <StrictMode>
+  //   <App />
+  // </StrictMode>
 );

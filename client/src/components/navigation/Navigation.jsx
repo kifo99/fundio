@@ -1,12 +1,15 @@
-import { Globe, CircleUser, ShoppingBasket } from 'lucide-react';
+import { Menu, Globe, CircleUser, ShoppingBasket } from 'lucide-react';
+import { useNavigate, Link } from 'react-router';
 import './navigation.css';
 
 export function Navigation() {
+  let navigate = useNavigate();
+
   return (
     <div className="navbar">
       {/* Menu section */}
       <div className="navbar-menu">
-        <p>menu</p>
+        <Menu className="navbar-action-item-icon" size={24} />
       </div>
       {/* Web site title section */}
       <div className="navbar-brand">
@@ -17,20 +20,18 @@ export function Navigation() {
         <nav>
           <ul className="navbar-actions-list">
             <li className="navbar-action-item">
-              <a href="#">
-                <Globe className="navbar-action-item-icon" size={24} />
-              </a>
+              <Globe className="navbar-action-item-icon" size={24} />
             </li>
 
             <li className="navbar-action-item">
-              <a href="#">
+              <Link to="/login">
                 <CircleUser className="navbar-action-item-icon" size={24} />
-              </a>
+              </Link>
             </li>
             <li className="navbar-action-item">
-              <a href="#">
+              <Link to="cart">
                 <ShoppingBasket className="navbar-action-item-icon" size={24} />
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>

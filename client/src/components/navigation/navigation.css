@@ -1,6 +1,6 @@
 .navbar {
   width: 100%;
-  height: 100px;
+  height: 80px;
   background-color: transparent;
   display: grid;
   justify-content: space-around;
@@ -8,9 +8,9 @@
   align-items: center;
 }
 
-.navbar-actions {
+.navbar-menu a {
+  color: inherit;
 }
-
 .navbar-actions-list {
   display: grid;
   justify-content: space-around;
