@@ -3,7 +3,7 @@ import { Signup } from '../signup/Signup';
 import { useNavigate } from 'react-router';
 import { useLogin } from '../../../queries/auth.queries';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setUser, setUserToken } from '../../../store/authSlice';
 
 export function Login() {
@@ -11,6 +11,7 @@ export function Login() {
   const [userInput, setUserInput] = useState({ email: '', password: '' });
   const login = useLogin();
   const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.userToken);
   function handleSubmit(e) {
     e.preventDefault();
     login.mutate(userInput, {
@@ -20,6 +21,8 @@ export function Login() {
       },
     });
   }
+
+  console.log(`This is token: ${token}`);
   // TODO add tost about successful login
 
   // TODO Create Authentication of input

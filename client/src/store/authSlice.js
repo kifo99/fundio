@@ -22,6 +22,18 @@ const authSlice = createSlice({
       state.userToken = action.payload;
       console.log(`State set userToken: ${state.userToken}`);
     },
+    setIsAuth: (state) => {
+      state.isAuth = true;
+    },
+    setLoading: (state) => {
+      state.loading = true;
+    },
+    setSuccess: (state) => {
+      state.success = true;
+    },
+    setError: (state, action) => {
+      state.error = action.payload;
+    },
   },
   extraReducers: (builder) => {},
 });
