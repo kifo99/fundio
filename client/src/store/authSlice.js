@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { useLogin } from '../queries/auth.queries';
+import { persistor } from './store';
 
 const initialState = {
   loading: false,
@@ -34,10 +35,18 @@ const authSlice = createSlice({
     setError: (state, action) => {
       state.error = action.payload;
     },
+    clearState: (state) => {
+      return initialState;
+    },
+    clearPersistedData: () => {
+      persistor.purge();
+      return initialState();
+    },
   },
   extraReducers: (builder) => {},
 });
 
 // TODO export the rest of actions
-export const { setUser, setUserToken } = authSlice.actions;
+export const { setUser, setUserToken, setIsAuth, setSuccess } =
+  authSlice.actions;
 export default authSlice.reducer;

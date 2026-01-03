@@ -1,10 +1,14 @@
 import './login.css';
-import { Signup } from '../signup/Signup';
 import { useNavigate } from 'react-router';
 import { useLogin } from '../../../queries/auth.queries';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUser, setUserToken } from '../../../store/authSlice';
+import {
+  setUser,
+  setUserToken,
+  setIsAuth,
+  setSuccess,
+} from '../../../store/authSlice';
 
 export function Login() {
   const navigate = useNavigate();
@@ -12,17 +16,20 @@ export function Login() {
   const login = useLogin();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.userToken);
+  const isAuth = useSelector((state) => state.auth.isAuth);
+  const user = useSelector((state) => state.auth.userInfo);
   function handleSubmit(e) {
     e.preventDefault();
     login.mutate(userInput, {
-      onSuccess: async (data) => {
+      onSuccess: (data) => {
         dispatch(setUser(data.user));
         dispatch(setUserToken(data.token));
+        dispatch(setIsAuth());
+        dispatch(setSuccess());
+        navigate('/');
       },
     });
   }
-
-  console.log(`This is token: ${token}`);
   // TODO add tost about successful login
 
   // TODO Create Authentication of input
