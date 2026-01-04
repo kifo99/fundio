@@ -4,7 +4,7 @@ import { persistor } from './store';
 
 const initialState = {
   loading: false,
-  userInfo: {},
+  userId: null,
   userToken: null,
   isAuth: false,
   error: null,
@@ -15,9 +15,9 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     // TODO Create the rest of set functions (setLoading, setIsAuth, setError, setSuccess)
-    setUser: (state, action) => {
-      state.userInfo = action.payload;
-      console.log(`State set userInfo: ${JSON.stringify(state.userInfo)}`);
+    setUserId: (state, action) => {
+      state.userId = action.payload;
+      console.log(`State set userId: ${JSON.stringify(state.userId)}`);
     },
     setUserToken: (state, action) => {
       state.userToken = action.payload;
@@ -40,13 +40,19 @@ const authSlice = createSlice({
     },
     clearPersistedData: () => {
       persistor.purge();
-      return initialState();
+      return initialState;
     },
   },
   extraReducers: (builder) => {},
 });
 
 // TODO export the rest of actions
-export const { setUser, setUserToken, setIsAuth, setSuccess } =
-  authSlice.actions;
+export const {
+  setUserId,
+  setUserToken,
+  setIsAuth,
+  setSuccess,
+  clearState,
+  clearPersistedData,
+} = authSlice.actions;
 export default authSlice.reducer;

@@ -7,8 +7,13 @@ import persistStore from 'redux-persist/es/persistStore';
 
 const authTransform = createTransform(
   (saveState, key) => {
+    if (!saveState || typeof saveState !== 'object') {
+      return saveState;
+    }
     return {
-      ...saveState,
+      userToken: saveState.userToken,
+      isAuth: saveState.isAuth,
+      userId: saveState.userId,
       savedAt: new Date().getTime(),
     };
   },
@@ -43,7 +48,7 @@ const rootReducer = combineReducers({
 const persistedReducer = persistReducer(rootPersistConfig, rootReducer);
 
 const store = configureStore({
-  reducer: persistedReducer,
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
