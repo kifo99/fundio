@@ -1,14 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { useLogin } from '../queries/auth.queries';
-import { persistor } from './store';
+import { PURGE } from 'redux-persist';
+
+const sessionDuration = parseInt(import.meta.env.SESSION_DURATION, 10);
 
 const initialState = {
-  loading: false,
   userId: null,
   userToken: null,
   isAuth: false,
   error: null,
   success: false,
+  loginTime: null,
 };
 const authSlice = createSlice({
   name: 'auth',
@@ -26,24 +27,24 @@ const authSlice = createSlice({
     setIsAuth: (state) => {
       state.isAuth = true;
     },
-    setLoading: (state) => {
-      state.loading = true;
-    },
     setSuccess: (state) => {
       state.success = true;
     },
     setError: (state, action) => {
       state.error = action.payload;
     },
-    clearState: (state) => {
-      return initialState;
+    setLoginTime: (state) => {
+      state.loginTime = new Date().getTime();
     },
-    clearPersistedData: () => {
-      persistor.purge();
+    logout: (state) => {
       return initialState;
     },
   },
-  extraReducers: (builder) => {},
+  extraReducers: (builder) => {
+    builder.addCase(PURGE, () => {
+      return initialState;
+    });
+  },
 });
 
 // TODO export the rest of actions
@@ -52,7 +53,7 @@ export const {
   setUserToken,
   setIsAuth,
   setSuccess,
-  clearState,
-  clearPersistedData,
+  setLoginTime,
+  logout,
 } = authSlice.actions;
 export default authSlice.reducer;

@@ -2,12 +2,13 @@ import './login.css';
 import { useNavigate } from 'react-router';
 import { useLogin } from '../../../queries/auth.queries';
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
-  setUser,
+  setUserId,
   setUserToken,
   setIsAuth,
   setSuccess,
+  setLoginTime,
 } from '../../../store/authSlice';
 
 export function Login() {
@@ -15,17 +16,15 @@ export function Login() {
   const [userInput, setUserInput] = useState({ email: '', password: '' });
   const login = useLogin();
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.auth.userToken);
-  const isAuth = useSelector((state) => state.auth.isAuth);
-  const user = useSelector((state) => state.auth.userInfo);
   function handleSubmit(e) {
     e.preventDefault();
     login.mutate(userInput, {
       onSuccess: (data) => {
-        dispatch(setUser(data.user));
+        dispatch(setUserId(data.user.id));
         dispatch(setUserToken(data.token));
         dispatch(setIsAuth());
         dispatch(setSuccess());
+        dispatch(setLoginTime());
         navigate('/');
       },
     });
