@@ -1,53 +1,74 @@
-import './signup.css';
+import './signup.scss';
 
 export function Signup() {
+  function handleSignup() {
+    console.log('Submitted');
+  }
   return (
     <div className="signup">
-      <h1 className="signup-title">Signup</h1>
-      <form className="signup-form" action="post">
-        <div className="signup-field">
+      <form className="signup-container" action="post" onSubmit={handleSignup}>
+        <h1 className="signup-title">Signup</h1>
+        <div className="input-group">
+          <label htmlFor="firstName">FIRST NAME</label>
           <input
-            className="signup-input"
-            type="text"
+            type="firstName"
+            id="firstName"
             name="firstName"
-            placeholder="First name"
+            placeholder="Your name"
+            onChange={(e) =>
+              setUserInput({ ...userInput, firstName: e.target.value })
+            }
           />
         </div>
-        <div className="signup-field">
+        <div className="input-group">
+          <label htmlFor="lastName">LAST NAME</label>
           <input
-            className="signup-input"
-            type="text"
+            type="lastName"
+            id="lastName"
             name="lastName"
-            placeholder="Last Name"
+            placeholder="Your last name"
+            onChange={(e) =>
+              setUserInput({ ...userInput, lastName: e.target.value })
+            }
           />
         </div>
-        <div className="signup-field">
+        <div className="input-group">
+          <label htmlFor="email">EMAIL</label>
           <input
-            className="signup-input"
             type="email"
+            id="email"
             name="email"
-            placeholder="Email address"
+            placeholder="your@email.com"
+            onChange={(e) =>
+              setUserInput({ ...userInput, email: e.target.value })
+            }
           />
         </div>
-        <div className="signup-field">
+        <div className="input-group">
+          <label htmlFor="password">PASSWORD</label>
           <input
-            className="signup-input"
             type="password"
+            id="password"
             name="password"
-            placeholder="Password"
+            placeholder="********"
+            onChange={(e) =>
+              setUserInput({ ...userInput, password: e.target.value })
+            }
           />
         </div>
-        <div className="signup-field">
+        <div className="input-group">
+          <label htmlFor="confirmPassword">CONFIRM PASSWORD</label>
           <input
-            className="signup-input"
-            type="password"
+            type="confirmPassword"
+            id="confirmPassword"
             name="confirmPassword"
-            placeholder="Confirm password"
+            placeholder="********"
+            onChange={(e) =>
+              setUserInput({ ...userInput, confirmPassword: e.target.value })
+            }
           />
         </div>
-        <button type="submit" className="signup-button">
-          Signup
-        </button>
+        <button type="submit">SIGN UP</button>
       </form>
     </div>
   );
