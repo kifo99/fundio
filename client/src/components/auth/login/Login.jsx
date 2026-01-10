@@ -1,4 +1,4 @@
-import './login.css';
+import './login.scss';
 import { useNavigate } from 'react-router';
 import { useLogin } from '../../../queries/auth.queries';
 import { useState } from 'react';
@@ -36,38 +36,43 @@ export function Login() {
   // TODO Show errors
   return (
     <div className="login">
-      <h1 className="login-title">LOGIN</h1>
-      <form className="login-form" action="post" onSubmit={handleSubmit}>
-        <div className="login-field">
+      <form className="login-container" action="post" onSubmit={handleSubmit}>
+        <h1 className="login-title">LOGIN</h1>
+
+        <div className="input-group">
+          <label htmlFor="email">EMAIL</label>
           <input
-            className="login-input"
             type="email"
+            id="email"
             name="email"
-            placeholder="Email address"
+            placeholder="your@email.com"
             onChange={(e) =>
               setUserInput({ ...userInput, email: e.target.value })
             }
           />
         </div>
-        <div className="login-field">
+        <div className="input-group">
+          <label htmlFor="password">PASSWORD</label>
           <input
-            className="login-input"
             type="password"
+            id="password"
             name="password"
-            placeholder="Password"
+            placeholder="********"
             onChange={(e) =>
               setUserInput({ ...userInput, password: e.target.value })
             }
           />
         </div>
-        <button type="submit" className="login-button">
-          Login
-        </button>
-      </form>
 
-      <button className="register-button" onClick={() => navigate('/signup')}>
-        Register
-      </button>
+        <button type="submit">SIGN IN</button>
+
+        <div className="divider"></div>
+
+        <div className="footer">
+          Don't have an account?{' '}
+          <span onClick={() => navigate('/signup')}>Sign up</span>
+        </div>
+      </form>
     </div>
   );
 }
