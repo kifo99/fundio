@@ -1,8 +1,39 @@
 import './signup.scss';
+import { useSignup } from '../../../queries/auth.queries';
+import { data, useNavigate } from 'react-router';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import {
+  setUserId,
+  setUserToken,
+  setIsAuth,
+  setSuccess,
+  setLoginTime,
+} from '../../../store/authSlice';
 
 export function Signup() {
-  function handleSignup() {
-    console.log('Submitted');
+  const navigate = useNavigate();
+  const [userInput, setUserInput] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
+  const signup = useSignup();
+  const dispatch = useDispatch();
+  function handleSignup(e) {
+    e.preventDefault();
+    signup.mutate(userInput, {
+      onSuccess: (data) => {
+        dispatch(setUserId(data.user.id));
+        dispatch(setUserToken(data.token));
+        dispatch(setIsAuth());
+        dispatch(setSuccess());
+        dispatch(setLoginTime());
+        navigate('/');
+      },
+    });
   }
   return (
     <div className="signup">
