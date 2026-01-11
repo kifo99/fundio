@@ -1,6 +1,6 @@
 import './signup.scss';
-import { useSignup } from '../../../queries/auth.queries';
-import { data, useNavigate } from 'react-router';
+import { useSignup, useSignupVendor } from '../../../queries/auth.queries';
+import { useNavigate } from 'react-router';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
@@ -23,6 +23,7 @@ export function Signup() {
   const [signupType, setSignupType] = useState('user');
 
   const signup = useSignup();
+  const signupVendor = useSignupVendor();
   const dispatch = useDispatch();
 
   function handleSignup(e) {
@@ -39,7 +40,19 @@ export function Signup() {
     });
   }
 
-  function handleVendorSignup(e) {}
+  function handleVendorSignup(e) {
+    e.preventDefault();
+    signupVendor.mutate(userInput, {
+      onSuccess: (data) => {
+        dispatch(setUserId(data.user.id));
+        dispatch(setUserToken(data.token));
+        dispatch(setIsAuth());
+        dispatch(setSuccess());
+        dispatch(setLoginTime());
+        navigate('/');
+      },
+    });
+  }
 
   return (
     <div className="signup">
