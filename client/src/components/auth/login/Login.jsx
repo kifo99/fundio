@@ -68,7 +68,7 @@ export function Login() {
 
         <div className="divider"></div>
 
-        <div className="footer">
+        <div className="login-footer">
           Don't have an account?{' '}
           <span onClick={() => navigate('/signup')}>Sign up</span>
         </div>
