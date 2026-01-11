@@ -20,8 +20,11 @@ export function Signup() {
     password: '',
     confirmPassword: '',
   });
+  const [signupType, setSignupType] = useState('user');
+
   const signup = useSignup();
   const dispatch = useDispatch();
+
   function handleSignup(e) {
     e.preventDefault();
     signup.mutate(userInput, {
@@ -35,10 +38,19 @@ export function Signup() {
       },
     });
   }
+
+  function handleVendorSignup(e) {}
+
   return (
     <div className="signup">
-      <form className="signup-container" action="post" onSubmit={handleSignup}>
-        <h1 className="signup-title">Signup</h1>
+      <form
+        className="signup-container"
+        action="post"
+        onSubmit={signupType === 'user' ? handleSignup : handleVendorSignup}
+      >
+        <h1 className="signup-title">
+          {signupType === 'user' ? 'SIGN UP' : 'SIGN UP AS VENDOR'}
+        </h1>
         <div className="input-group">
           <label htmlFor="firstName">FIRST NAME</label>
           <input
@@ -99,7 +111,29 @@ export function Signup() {
             }
           />
         </div>
+
         <button type="submit">SIGN UP</button>
+        {signupType === 'user' ? (
+          <>
+            <div className="divider"></div>
+
+            <div className="signup-footer">
+              Want to sell your own products?{' '}
+              <span onClick={() => setSignupType('vendor')}>
+                Sign up as Vendor
+              </span>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="divider"></div>
+
+            <div className="signup-footer">
+              Go back to?{' '}
+              <span onClick={() => setSignupType('user')}>Sign up</span>
+            </div>
+          </>
+        )}
       </form>
     </div>
   );
