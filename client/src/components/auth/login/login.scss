@@ -108,7 +108,7 @@ button:hover {
   color: $primary-color;
 }
 
-.footer {
+.login-footer {
   span {
     color: $primary-color;
     font-weight: bold;
@@ -116,10 +116,9 @@ button:hover {
   }
 }
 
-.footer {
+.login-footer {
   span:hover {
-    color: $primary-color;
-    font-size: 20px;
+    color: $accent;
     cursor: pointer;
   }
 }
