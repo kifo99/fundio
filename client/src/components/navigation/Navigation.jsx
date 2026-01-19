@@ -1,6 +1,6 @@
 import { Menu, Globe, CircleUser, ShoppingBasket } from 'lucide-react';
 import { useNavigate, Link } from 'react-router';
-import './navigation.css';
+import './navigation.scss';
 
 export function Navigation() {
   let navigate = useNavigate();
