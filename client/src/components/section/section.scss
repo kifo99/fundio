@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap');
-$main-font: 'Charis SIL', serif;
-$accent: #1abf0f;
+$primary-font: 'Charis SIL', serif;
+$primary-color: #4a4a4a;
 
 .section {
-  font-family: $main-font;
+  width: 100%;
+  height: 100vh;
+  font-family: $primary-font;
   scroll-snap-stop: always;
-  max-height: 100%;
-  max-width: 100%;
   scroll-snap-align: start;
   background-size: cover;
   background-position: center;
@@ -14,38 +14,69 @@ $accent: #1abf0f;
 }
 
 .section--hero {
-  display: flex;
-  flex-direction: column;
+  padding-top: 200px;
 
   .section__title {
-    margin: 35px 0;
+    margin: auto;
+    width: fit-content;
+    text-align: center;
+    color: $primary-color;
+    position: relative;
     h1 {
-      width: 100%;
-      height: 10vh;
-      box-sizing: border-box;
-      padding-top: 15rem;
-      font-size: 7rem;
+      font-size: 70px;
+      font-weight: 500;
+      position: relative;
+      z-index: 10;
     }
-  }
-
-  .section__body {
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-    margin: 35px 0;
-    button {
-      width: 20vw;
-      height: 3vh;
-      text-decoration: underline;
-      background-color: transparent;
-      border: none;
-      font-weight: bold;
-      font-size: 6rem;
-      color: $accent;
-    }
-    button:hover {
-      font-size: 6.2rem;
-      color: #175c12;
+    .back__text {
+      width: max-content;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      span {
+        display: inline-block;
+        font-size: 250px;
+        font-weight: 700;
+        opacity: 0;
+        -webkit-text-stroke: 4px rgb(132, 176, 103);
+        -webkit-text-fill-color: transparent;
+        transform: translateY(100px);
+        transition:
+          transform 1s,
+          opacity 0.5s ease-in-out;
+      }
+      span:hover {
+        -webkit-text-stroke: 4px rgb(234, 162, 33);
+      }
+      span.active {
+        transform: translateY(0px);
+        opacity: 1;
+      }
+      span:nth-child(1) {
+        transition-delay: 0.1s;
+      }
+      span:nth-child(2) {
+        transition-delay: 0.2s;
+      }
+      span:nth-child(3) {
+        transition-delay: 0.3s;
+      }
+      span:nth-child(4) {
+        transition-delay: 0.4s;
+      }
+      span:nth-child(5) {
+        transition-delay: 0.5s;
+      }
+      span:nth-child(6) {
+        transition-delay: 0.6s;
+      }
+      span:nth-child(7) {
+        transition-delay: 0.7s;
+      }
+      span:nth-child(8) {
+        transition-delay: 0.8s;
+      }
     }
   }
 }
