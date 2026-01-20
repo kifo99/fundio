@@ -90,11 +90,11 @@ input:focus {
     transition: all 0.3s;
     border-radius: 12px;
   }
-}
 
-button:hover {
-  box-shadow: 4px 4px 0px $primary-color;
-  transform: translate(-2px, -2px);
+  button:hover {
+    box-shadow: 4px 4px 0px $primary-color;
+    transform: translate(-2px, -2px);
+  }
 }
 
 .divider {

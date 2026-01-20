@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap');
+$main-font: 'Charis SIL', serif;
+$accent: #1abf0f;
+
+.section {
+  font-family: $main-font;
+  scroll-snap-stop: always;
+  max-height: 100%;
+  max-width: 100%;
+  scroll-snap-align: start;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.section--hero {
+  display: flex;
+  flex-direction: column;
+
+  .section__title {
+    margin: 35px 0;
+    h1 {
+      width: 100%;
+      height: 10vh;
+      box-sizing: border-box;
+      padding-top: 15rem;
+      font-size: 7rem;
+    }
+  }
+
+  .section__body {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin: 35px 0;
+    button {
+      width: 20vw;
+      height: 3vh;
+      text-decoration: underline;
+      background-color: transparent;
+      border: none;
+      font-weight: bold;
+      font-size: 6rem;
+      color: $accent;
+    }
+    button:hover {
+      font-size: 6.2rem;
+      color: #175c12;
+    }
+  }
+}
