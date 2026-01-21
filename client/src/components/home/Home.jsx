@@ -2,10 +2,13 @@ import { useDispatch } from 'react-redux';
 import { useEffect, useRef } from 'react';
 import { logout } from '../../store/authSlice';
 import { Section } from '../section/Section.jsx';
+import { useNavigate } from 'react-router';
 import './home.scss';
 export function Home() {
   const dispatch = useDispatch();
   const backTextRef = useRef();
+  const navigate = useNavigate();
+
   return (
     <article className="section--wrapper">
       <Section
@@ -25,10 +28,10 @@ export function Home() {
             <span>E</span>
             <span>R</span>
           </div>
+          <div className="section__button">
+            <button onClick={() => navigate('/signup')}>JOIN US</button>
+          </div>
         </div>
-        {/* <div className="section__body">
-          <button>JOIN US</button>
-        </div> */}
       </Section>
       <Section>
         <h1>Section 1</h1>
