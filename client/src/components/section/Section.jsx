@@ -1,24 +1,40 @@
 import { useEffect } from 'react';
+import { useIsVisible } from '../../hooks/useIsVisible.js';
 import './section.scss';
 
 export function Section({
   variant = 'default',
   imgUrl = '',
-  backTextRef,
+  propRef,
   children,
 }) {
+  const targetVisible = useIsVisible(propRef);
   useEffect(() => {
-    if (!backTextRef?.current) {
+    if (!propRef?.current) {
       console.log('Reference does not exist');
       return;
     }
 
-    const spans = backTextRef.current.querySelectorAll('span');
+    const spans = propRef.current.querySelectorAll('span');
 
     spans.forEach((element) => {
       element.classList.add('active');
     });
-  }, [backTextRef]);
+  }, [propRef]);
+
+  useEffect(() => {
+    if (!targetVisible) return;
+
+    const aboutTitles = propRef.current.querySelectorAll('.about__title');
+
+    if (!aboutTitles) return;
+    console.log('about title is ready');
+    aboutTitles.forEach((el) => {
+      el.classList.toggle('active', targetVisible);
+      console.log(el);
+    });
+    // aboutTitle.classList.add('active');
+  }, [propRef, targetVisible]);
 
   return (
     <section

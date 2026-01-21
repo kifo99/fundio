@@ -7,6 +7,7 @@ import './home.scss';
 export function Home() {
   const dispatch = useDispatch();
   const backTextRef = useRef();
+  const aboutRef = useRef();
   const navigate = useNavigate();
 
   return (
@@ -14,10 +15,10 @@ export function Home() {
       <Section
         variant="hero"
         imgUrl="/img/home-images/tomasz-filipek-joOVC9d-jis-unsplash.jpg"
-        backTextRef={backTextRef}
+        propRef={backTextRef}
       >
-        <div className="section__title">
-          <h1>Supporting Local Businesses</h1>
+        <div className="hero">
+          <h1 className="hero__title">Supporting Local Businesses</h1>
           <div className="back__text" ref={backTextRef}>
             <span>T</span>
             <span>O</span>
@@ -28,13 +29,18 @@ export function Home() {
             <span>E</span>
             <span>R</span>
           </div>
-          <div className="section__button">
+          <div className="hero__button">
             <button onClick={() => navigate('/signup')}>JOIN US</button>
           </div>
         </div>
       </Section>
-      <Section>
-        <h1>Section 1</h1>
+      <Section variant="about" propRef={aboutRef}>
+        <div className="about" ref={aboutRef}>
+          <div className="about__title">
+            <h1>Who are we?</h1>
+            <p></p>
+          </div>
+        </div>
       </Section>
       <Section imgUrl="/img/home-images/jacopo-maiarelli--gOUx23DNks-unsplash.jpg">
         <h1>Section 1</h1>
