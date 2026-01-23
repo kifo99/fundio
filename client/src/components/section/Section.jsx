@@ -8,7 +8,7 @@ export function Section({
   propRef,
   children,
 }) {
-  const targetVisible = useIsVisible(propRef);
+  let targetVisible = useIsVisible(propRef);
   useEffect(() => {
     if (!propRef?.current) {
       console.log('Reference does not exist');
@@ -23,11 +23,12 @@ export function Section({
   }, [propRef]);
 
   useEffect(() => {
-    if (!targetVisible) return;
+    if (!propRef) return;
 
     const aboutTitles = propRef.current.querySelectorAll('.about__title');
 
     if (!aboutTitles) return;
+
     console.log('about title is ready');
     aboutTitles.forEach((el) => {
       el.classList.toggle('active', targetVisible);

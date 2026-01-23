@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 
+// Pass element ref and set visibility of element in viewport
 export function useIsVisible(ref) {
   const [isIntersecting, setIntersecting] = useState(false);
   useEffect(() => {
