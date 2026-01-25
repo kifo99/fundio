@@ -38,7 +38,60 @@ export function Home() {
         <div className="about" ref={aboutRef}>
           <div className="about__title">
             <h1>Who are we?</h1>
-            <p></p>
+          </div>
+          <div className="about__body">
+            <div className="about__body-title">
+              <span>We </span>
+              <span>are </span>
+              <span>a </span>
+              <span>platform </span>
+              <span>dedicated </span>
+              <span>to </span>
+              <span>supporting </span>
+              <span>local </span>
+              <span>products </span>
+              <span>and </span>
+              <span>the </span>
+              <span>people </span>
+              <span>behind </span>
+              <span>them, </span>
+              <span>connecting </span>
+              <span>them </span>
+              <span>with </span>
+              <span>a </span>
+              <span>wider </span>
+              <span>market.</span>
+            </div>
+            <div className="about__body-wrapper">
+              <div className="card">
+                <h3>What Do We Do?</h3>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Distinctio dolores velit beatae incidunt assumenda repellat,
+                  error esse ad odio voluptates quia unde a vero. Rerum,
+                  reiciendis. Error eos velit molestias!
+                </p>
+              </div>
+              <div className="card">
+                <h3>What We Represent?</h3>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Possimus atque facilis assumenda, id consequuntur aut sint
+                  veniam saepe dicta pariatur perspiciatis quibusdam provident
+                  distinctio, voluptatibus similique qui, obcaecati praesentium
+                  facere?
+                </p>
+              </div>
+              <div className="card">
+                <h3>What We Provide?</h3>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Commodi alias libero deleniti molestiae expedita dolores enim
+                  nobis adipisci eligendi quibusdam, architecto at ut, eos quis,
+                  animi fuga magni vero modi?
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </Section>

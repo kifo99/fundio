@@ -1,8 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap');
-$primary-font: 'Charis SIL', serif;
-// $primary-color: #4a4a4a;
-// $secondary-color: rgb(0, 0, 128);
-// $background-text-color: rgb(132, 176, 103);
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+$primary-font: 'Roboto Mono', monospace;
 
 $primary-color: rgb(181, 199, 235);
 $secondary-color: rgb(85, 124, 153);
@@ -133,6 +130,68 @@ $shadow-color: rgb(181, 199, 235);
     .about__title.active {
       transform: translateY(0px);
       opacity: 1;
+    }
+
+    .about__body {
+      margin: 55px auto;
+      .about__body-title {
+        span {
+          font-size: 30px;
+          font-weight: 500;
+          position: relative;
+          opacity: 0;
+          z-index: 10;
+          transform: translateX(-100vw);
+          transition:
+            transform 0.8s,
+            opacity 0.5s ease-in-out;
+        }
+      }
+
+      span.active {
+        transform: translateX(0px);
+        opacity: 1;
+      }
+      span:hover {
+        color: $secondary-color;
+      }
+    }
+
+    .about__body-wrapper {
+      display: flex;
+      justify-content: space-around;
+      margin: 10rem auto;
+      perspective: 1000px;
+      div {
+        width: 20%;
+        height: 100%;
+        border: 1px solid $secondary-color;
+        border-radius: 35px;
+        position: relative;
+        opacity: 0;
+        z-index: 10;
+        transform: translateZ(-300px);
+        transition:
+          transform 1s,
+          opacity 0.5s ease-in-out;
+        transform-style: preserve-3d;
+
+        h3,
+        p {
+          margin-bottom: 25px;
+          padding: 30px;
+        }
+      }
+
+      div.active {
+        transform: translateZ(0px);
+        opacity: 1;
+      }
+
+      .card:hover {
+        box-shadow: 4px 4px 0px $primary-color;
+        transform: translate(-2px, -2px);
+      }
     }
   }
 }
