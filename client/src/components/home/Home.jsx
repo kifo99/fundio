@@ -94,7 +94,10 @@ export function Home() {
               </div>
             </div>
 
-            <ChevronDown className="about__more" />
+            <ChevronDown
+              className="about__more"
+              onClick={() => navigate('/about')}
+            />
           </div>
         </div>
       </Section>

@@ -200,9 +200,10 @@ $shadow-color: rgb(181, 199, 235);
         opacity: 1;
       }
 
-      .card:hover {
-        box-shadow: 4px 4px 0px $primary-color;
-        transform: translate(-2px, -2px);
+      div:hover {
+        cursor: pointer;
+        transform: translateZ(100px);
+        transition-delay: 0.1s;
       }
     }
   }
