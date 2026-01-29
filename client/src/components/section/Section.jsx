@@ -32,6 +32,7 @@ export function Section({
     const aboutTitles = propRef.current.querySelectorAll('.about__title');
     const spans = propRef.current.querySelectorAll('.about__body-title span');
     const cards = propRef.current.querySelectorAll('.about__body-wrapper div');
+    const aboutMore = propRef.current.querySelectorAll('.about__more');
 
     // sets daley for the animation of about title
     if (!spans.length) return;
@@ -61,6 +62,13 @@ export function Section({
     if (!aboutTitles) return;
 
     aboutTitles.forEach((el) => {
+      el.classList.toggle('active', targetVisible);
+    });
+
+    if (!aboutMore) return;
+
+    // adds active class based on section visibility
+    aboutMore.forEach((el) => {
       el.classList.toggle('active', targetVisible);
     });
   }, [propRef, targetVisible]);

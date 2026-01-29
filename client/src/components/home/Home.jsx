@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react';
 import { logout } from '../../store/authSlice';
 import { Section } from '../section/Section.jsx';
 import { useNavigate } from 'react-router';
+import { ChevronDown } from 'lucide-react';
 import './home.scss';
 export function Home() {
   const dispatch = useDispatch();
@@ -92,6 +93,8 @@ export function Home() {
                 </p>
               </div>
             </div>
+
+            <ChevronDown className="about__more" />
           </div>
         </div>
       </Section>

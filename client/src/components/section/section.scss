@@ -155,6 +155,18 @@ $shadow-color: rgb(181, 199, 235);
       span:hover {
         color: $secondary-color;
       }
+
+      .about__more {
+        width: 300px;
+        height: 60px;
+        opacity: 0;
+      }
+      .about__more.active {
+        opacity: 1;
+      }
+      .about__more:hover {
+        color: $secondary-color;
+      }
     }
 
     .about__body-wrapper {
