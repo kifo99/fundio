@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import { logout } from '../../store/authSlice';
 import { Section } from '../section/Section.jsx';
 import { useNavigate } from 'react-router';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Circle } from 'lucide-react';
 import './home.scss';
 export function Home() {
   const dispatch = useDispatch();
@@ -63,41 +63,62 @@ export function Home() {
               <span>wider </span>
               <span>market.</span>
             </div>
-            <div className="about__body-wrapper">
-              <div className="card">
-                <h3>What Do We Do?</h3>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Distinctio dolores velit beatae incidunt assumenda repellat,
-                  error esse ad odio voluptates quia unde a vero. Rerum,
-                  reiciendis. Error eos velit molestias!
-                </p>
+            <div className="carousel__wrapper">
+              <div className="carousel__container">
+                <div className="carousel__item">
+                  <h3>What Do We Do?</h3>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Distinctio dolores velit beatae incidunt assumenda repellat,
+                    error esse ad odio voluptates quia unde a vero. Rerum,
+                    reiciendis. Error eos velit molestias! Lorem ipsum dolor
+                    sit, amet consectetur adipisicing elit. Nemo illo voluptatem
+                    iusto veniam nesciunt aperiam sapiente facilis provident
+                    autem molestias dolorum eum odio assumenda quasi, optio
+                    minus labore dignissimos atque. Lorem ipsum dolor sit amet
+                    consectetur adipisicing elit. Adipisci quae ipsam maxime
+                    corporis cumque vitae cupiditate voluptatum quis? Doloribus
+                    ipsum dicta officiis minima vel quam magni voluptate
+                    laborum, ea excepturi.
+                  </p>
+                </div>
+                <div className="carousel__item inactive">
+                  <h3>What We Represent?</h3>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Possimus atque facilis assumenda, id consequuntur aut sint
+                    veniam saepe dicta pariatur perspiciatis quibusdam provident
+                    distinctio, voluptatibus similique qui, obcaecati
+                    praesentium facere?
+                  </p>
+                </div>
+                <div className="carousel__item inactive">
+                  <h3>What We Provide?</h3>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Commodi alias libero deleniti molestiae expedita dolores
+                    enim nobis adipisci eligendi quibusdam, architecto at ut,
+                    eos quis, animi fuga magni vero modi?
+                  </p>
+                </div>
               </div>
-              <div className="card">
-                <h3>What We Represent?</h3>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Possimus atque facilis assumenda, id consequuntur aut sint
-                  veniam saepe dicta pariatur perspiciatis quibusdam provident
-                  distinctio, voluptatibus similique qui, obcaecati praesentium
-                  facere?
-                </p>
-              </div>
-              <div className="card">
-                <h3>What We Provide?</h3>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Commodi alias libero deleniti molestiae expedita dolores enim
-                  nobis adipisci eligendi quibusdam, architecto at ut, eos quis,
-                  animi fuga magni vero modi?
-                </p>
-              </div>
+              <ul className="carousel__slide-list">
+                <li className="carousel__slide-item active">
+                  <Circle fill="#B5C7EB" />
+                </li>
+                <li className="carousel__slide-item">
+                  <Circle />
+                </li>
+                <li className="carousel__slide-item">
+                  <Circle />
+                </li>
+              </ul>
             </div>
 
-            <ChevronDown
+            {/* <ChevronDown
               className="about__more"
               onClick={() => navigate('/about')}
-            />
+            /> */}
           </div>
         </div>
       </Section>

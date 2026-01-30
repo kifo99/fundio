@@ -10,6 +10,7 @@ export function Section({
   children,
 }) {
   const targetVisible = useIsVisible(propRef);
+
   useStaggeredAnimation({
     ref: propRef,
     selector: 'span',
@@ -30,7 +31,6 @@ export function Section({
     isVisible: targetVisible,
     activeOnMount: false,
   });
-
   useStaggeredAnimation({
     ref: propRef,
     selector: '.about__body-title span',
@@ -41,7 +41,7 @@ export function Section({
   });
   useStaggeredAnimation({
     ref: propRef,
-    selector: '.about__body-wrapper div',
+    selector: '.carousel__wrapper div',
     className: 'active',
     isVisible: targetVisible,
     stagger: 0.1,

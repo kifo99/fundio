@@ -135,6 +135,7 @@ $shadow-color: rgb(181, 199, 235);
     .about__body {
       margin: 55px auto;
       .about__body-title {
+        margin: 5rem auto;
         span {
           font-size: 30px;
           font-weight: 500;
@@ -169,41 +170,61 @@ $shadow-color: rgb(181, 199, 235);
       }
     }
 
-    .about__body-wrapper {
-      display: flex;
-      justify-content: space-around;
-      margin: 10rem auto;
-      perspective: 1000px;
-      div {
-        width: 20%;
-        height: 100%;
-        border: 1px solid $secondary-color;
-        border-radius: 35px;
-        position: relative;
-        opacity: 0;
-        z-index: 10;
-        transform: translateZ(-300px);
-        transition:
-          transform 1s,
-          opacity 0.5s ease-in-out;
-        transform-style: preserve-3d;
+    .carousel__wrapper {
+      .carousel__container {
+        display: flex;
+        justify-content: space-around;
+        margin: 2rem auto;
+        perspective: 1000px;
+        .carousel__item {
+          width: 70%;
+          height: 100%;
+          border: 1px solid $secondary-color;
+          border-radius: 35px;
+          position: relative;
+          padding: 45px;
+          opacity: 0;
+          z-index: 10;
+          transform: translateZ(-300px);
+          transition:
+            transform 1s,
+            opacity 0.5s ease-in-out;
+          transform-style: preserve-3d;
 
-        h3,
-        p {
-          margin-bottom: 25px;
-          padding: 30px;
+          h3,
+          p {
+            margin-bottom: 15px;
+            padding: 10px;
+          }
+        }
+
+        .inactive {
+          display: none;
+        }
+
+        div.active {
+          transform: translateZ(0px);
+          opacity: 1;
+        }
+
+        .carousel__item:hover {
+          cursor: pointer;
+          transform: translateZ(100px);
+          transition-delay: 0.1s;
         }
       }
 
-      div.active {
-        transform: translateZ(0px);
-        opacity: 1;
-      }
+      .carousel__slide-list {
+        display: flex;
+        justify-content: center;
+        height: 100%;
+        list-style-type: none;
+        margin: 0 auto;
+        padding: 0;
 
-      div:hover {
-        cursor: pointer;
-        transform: translateZ(100px);
-        transition-delay: 0.1s;
+        .carousel__slide-item {
+          padding: 10px;
+        }
       }
     }
   }
