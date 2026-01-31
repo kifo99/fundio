@@ -1,9 +1,9 @@
 import { useDispatch } from 'react-redux';
-import { useEffect, useRef } from 'react';
-import { logout } from '../../store/authSlice';
+import { useRef } from 'react';
 import { Section } from '../section/Section.jsx';
+import { CardGrid } from '../card/CardGrid.jsx';
+import { ProductCard } from '../product-card/ProductCard.jsx';
 import { useNavigate } from 'react-router';
-import { ChevronDown, Circle } from 'lucide-react';
 import './home.scss';
 export function Home() {
   const dispatch = useDispatch();
@@ -35,95 +35,44 @@ export function Home() {
           </div>
         </div>
       </Section>
-      <Section variant="about" propRef={aboutRef}>
-        <div className="about" ref={aboutRef}>
-          <div className="about__title">
-            <h1>Who are we?</h1>
-          </div>
-          <div className="about__body">
-            <div className="about__body-title">
-              <span>We </span>
-              <span>are </span>
-              <span>a </span>
-              <span>platform </span>
-              <span>dedicated </span>
-              <span>to </span>
-              <span>supporting </span>
-              <span>local </span>
-              <span>products </span>
-              <span>and </span>
-              <span>the </span>
-              <span>people </span>
-              <span>behind </span>
-              <span>them, </span>
-              <span>connecting </span>
-              <span>them </span>
-              <span>with </span>
-              <span>a </span>
-              <span>wider </span>
-              <span>market.</span>
-            </div>
-            <div className="carousel__wrapper">
-              <div className="carousel__container">
-                <div className="carousel__item">
-                  <h3>What Do We Do?</h3>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Distinctio dolores velit beatae incidunt assumenda repellat,
-                    error esse ad odio voluptates quia unde a vero. Rerum,
-                    reiciendis. Error eos velit molestias! Lorem ipsum dolor
-                    sit, amet consectetur adipisicing elit. Nemo illo voluptatem
-                    iusto veniam nesciunt aperiam sapiente facilis provident
-                    autem molestias dolorum eum odio assumenda quasi, optio
-                    minus labore dignissimos atque. Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Adipisci quae ipsam maxime
-                    corporis cumque vitae cupiditate voluptatum quis? Doloribus
-                    ipsum dicta officiis minima vel quam magni voluptate
-                    laborum, ea excepturi.
-                  </p>
-                </div>
-                <div className="carousel__item inactive">
-                  <h3>What We Represent?</h3>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Possimus atque facilis assumenda, id consequuntur aut sint
-                    veniam saepe dicta pariatur perspiciatis quibusdam provident
-                    distinctio, voluptatibus similique qui, obcaecati
-                    praesentium facere?
-                  </p>
-                </div>
-                <div className="carousel__item inactive">
-                  <h3>What We Provide?</h3>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Commodi alias libero deleniti molestiae expedita dolores
-                    enim nobis adipisci eligendi quibusdam, architecto at ut,
-                    eos quis, animi fuga magni vero modi?
-                  </p>
-                </div>
-              </div>
-              <ul className="carousel__slide-list">
-                <li className="carousel__slide-item active">
-                  <Circle fill="#B5C7EB" />
-                </li>
-                <li className="carousel__slide-item">
-                  <Circle />
-                </li>
-                <li className="carousel__slide-item">
-                  <Circle />
-                </li>
-              </ul>
-            </div>
-
-            {/* <ChevronDown
-              className="about__more"
-              onClick={() => navigate('/about')}
-            /> */}
-          </div>
-        </div>
-      </Section>
-      <Section imgUrl="/img/home-images/jacopo-maiarelli--gOUx23DNks-unsplash.jpg">
-        <h1>Section 1</h1>
+      <Section>
+        <CardGrid title={'Top selling products!'}>
+          <ProductCard
+            imgUrl={
+              '../../../public/img/home-images/andres-carreno-RqS7r2CzL68-unsplash.jpg'
+            }
+            productName={'Tomato'}
+            price={'2.2'}
+          />
+          <ProductCard
+            imgUrl={
+              '../../../public/img/home-images/andres-carreno-RqS7r2CzL68-unsplash.jpg'
+            }
+            productName={'Tomato'}
+            price={'2.2'}
+          />
+          <ProductCard
+            imgUrl={
+              '../../../public/img/home-images/andres-carreno-RqS7r2CzL68-unsplash.jpg'
+            }
+            productName={'Tomato'}
+            price={'2.2'}
+          />
+          <ProductCard
+            imgUrl={
+              '../../../public/img/home-images/andres-carreno-RqS7r2CzL68-unsplash.jpg'
+            }
+            productName={'Tomato'}
+            price={'2.2'}
+          />
+          <ProductCard
+            imgUrl={
+              '../../../public/img/home-images/andres-carreno-RqS7r2CzL68-unsplash.jpg'
+            }
+            productName={'Tomato'}
+            price={'2.2'}
+          />
+        </CardGrid>
       </Section>
       <Section>
         <h1>Section 1</h1>
