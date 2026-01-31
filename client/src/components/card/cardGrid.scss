@@ -1,0 +1,28 @@
+@use '../../styles/abstracts/variables' as v;
+
+.card-grid {
+  display: flexbox;
+  justify-content: space-around;
+  align-items: center;
+  margin: 3rem auto;
+  width: 100%;
+  height: fit-content;
+  color: v.$primary-color;
+
+  &__header {
+    margin: 1rem auto;
+    width: 100%;
+  }
+
+  &__title {
+    margin: auto;
+    text-align: center;
+    font-size: 55px;
+    font-weight: 500;
+  }
+
+  &__body {
+    display: flex;
+    justify-content: space-between;
+  }
+}
