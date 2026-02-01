@@ -1,14 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
-$primary-font: 'Roboto Mono', monospace;
-$primary-bg-color: rgb(253, 251, 212);
+@use './styles/abstracts/variables' as v;
 
 * {
-  font-family: $primary-font;
+  font-family: v.$primary-font;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
 body {
-  background-color: $primary-bg-color;
+  background-color: v.$primary-bg-color;
 }
