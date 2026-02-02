@@ -1,13 +1,15 @@
 @use '../../styles/abstracts/variables' as v;
 
 .card-grid {
-  display: flexbox;
-  justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
   align-items: center;
   margin: 3rem auto;
-  width: 100%;
-  color: #807e7e;
+  width: 70%;
   height: fit-content;
+  color: #807e7e;
 
   &__header {
     margin: 1rem auto;

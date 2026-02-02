@@ -10,6 +10,7 @@ export function CardGrid({ title, children }) {
       </div>
 
       <div className="card-grid__body">{children}</div>
+      <div className="card-grid__bullets"></div>
     </div>
   );
 }
