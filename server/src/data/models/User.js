@@ -38,8 +38,10 @@ export default class User extends Model {
       products: {
         relation: Model.HasManyRelation,
         modelClass: Product,
-        from: 'user.id',
-        to: 'product.vendorId',
+        join: {
+          from: 'user.id',
+          to: 'product.vendorId',
+        },
       },
     };
   }

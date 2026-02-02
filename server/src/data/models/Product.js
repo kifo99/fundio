@@ -10,7 +10,6 @@ export default class Product extends Model {
     this.createdAt = new Date().toISOString();
   }
 
-  // TODO create schema for Product model
   static get jsonSchema() {
     return {
       type: 'object',
