@@ -13,3 +13,5 @@ route.delete('/products/:productId');
 
 // TODO create route that will edit product
 route.put('/products/:productsId');
+
+export default route;
