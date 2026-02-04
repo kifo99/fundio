@@ -1,9 +1,10 @@
 import User from '../data/models/User.js';
+import Product from '../data/models/Product.js';
 
-export async function getVendorsProducts(req, res, next) {
+// Controller for product route that retrieves products vendor created
+export const getVendorsProducts = async (req, res, next) => {
   try {
     const vendorId = req.params.vendorId;
-    console.log(vendorId);
     if (!vendorId) throw new Error('Vendor id was not passed');
 
     const vendor = await User.query().findById(vendorId);
@@ -21,4 +22,33 @@ export async function getVendorsProducts(req, res, next) {
       message: `Error: ${error.message}`,
     });
   }
-}
+};
+
+// Controller for product route that adds products
+export const addProduct = async (req, res, next) => {
+  try {
+    const vendorId = req.params.vendorId;
+    console.log(typeof vendorId);
+    const { productName, price, productImg, description, discount } = req.body;
+
+    if (!vendorId) throw new Error('Vendor id was not passed');
+
+    const product = await Product.query().insert({
+      vendorId: Number(vendorId),
+      productName,
+      price,
+      productImg,
+      description,
+      discount,
+    });
+
+    res.status(200).json({
+      message: 'Successfully added product',
+      product: product,
+    });
+  } catch (error) {
+    res.status(error.statusCode || 500).json({
+      message: `Error: ${error.message}`,
+    });
+  }
+};
