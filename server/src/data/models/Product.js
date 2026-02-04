@@ -20,15 +20,17 @@ export default class Product extends Model {
         'productImg',
         'description',
         'vendorId',
+        'discount',
       ],
 
       properties: {
         id: { type: 'integer' },
         vendorId: { type: 'integer' },
         productName: { type: 'string', minLength: 1, maxLength: 45 },
-        price: { type: 'number' },
         productImg: { type: 'string' },
-        description: { type: 'string', minLength: 300, maxLength: 1450 },
+        price: { type: 'number' },
+        discount: { type: 'number' },
+        description: { type: 'string', minLength: 100, maxLength: 250 },
       },
     };
   }
