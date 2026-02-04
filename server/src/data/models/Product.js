@@ -1,5 +1,5 @@
 import { Model } from 'objection';
-import User from './User';
+import User from './User.js';
 
 export default class Product extends Model {
   static get tableName() {
@@ -10,6 +10,7 @@ export default class Product extends Model {
     this.createdAt = new Date().toISOString();
   }
 
+  // TODO Add discount field
   static get jsonSchema() {
     return {
       type: 'object',
