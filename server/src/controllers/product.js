@@ -71,3 +71,31 @@ export const deleteProduct = async (req, res, next) => {
     });
   }
 };
+
+// Controller for product route that edit products
+export const editProduct = async (req, res, next) => {
+  try {
+    const productId = req.params.productId;
+    if (!productId) throw new Error('Product id was not passed');
+    const { productName, price, productImg, description, discount } = req.body;
+
+    const product = await Product.query().findById(productId);
+    if (!product) throw new Error('Product not found');
+    await product.$query().patch({
+      productName,
+      price,
+      productImg,
+      description,
+      discount,
+    });
+
+    res.status(200).json({
+      message: 'Successfully added product',
+      product: product,
+    });
+  } catch (error) {
+    res.status(error.statusCode || 500).json({
+      message: `Error: ${error.message}`,
+    });
+  }
+};
