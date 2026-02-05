@@ -1,5 +1,5 @@
 import { Model } from 'objection';
-import User from './User';
+import User from './User.js';
 
 export default class Cart extends Model {
   static get tableName() {
