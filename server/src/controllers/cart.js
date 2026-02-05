@@ -40,3 +40,21 @@ export const addCart = async (req, res, next) => {
     });
   }
 };
+
+export const deleteCart = async (req, res, next) => {
+  try {
+    const cartId = req.params.cartId;
+    if (!cartId) throw new Error('Cart id is not valid');
+
+    const cart = await Cart.query().deleteById(cartId);
+    if (!cart) throw new Error('Cart not found');
+
+    res.status(200).json({
+      message: 'Cart deleted.',
+    });
+  } catch (error) {
+    res.status(error.statusCode || 500).json({
+      message: `Error: ${error.message}`,
+    });
+  }
+};
