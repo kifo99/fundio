@@ -59,10 +59,7 @@ export const deleteProduct = async (req, res, next) => {
     const productId = req.params.productId;
     if (!productId) throw new Error('Product id was not passed');
 
-    const product = await Product.query().findById(productId);
-    if (!product) throw new Error('Product not found');
-
-    await product.$query().delete();
+    const product = await Product.query().deleteById(productId);
 
     res.status(200).json({ message: 'Product deleted successfully' });
   } catch (error) {
