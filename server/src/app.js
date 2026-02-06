@@ -10,6 +10,7 @@ import uploadRouter from './routes/uploads.js';
 import adminRouter from './routes/admin.js';
 import productRouter from './routes/product.js';
 import cartRouter from './routes/cart.js';
+import cartItemsRouter from './routes/cartItems.js';
 const app = express();
 
 app.use(helmet());
@@ -32,6 +33,7 @@ app.use('/upload', uploadRouter);
 app.use('/admin', adminRouter);
 app.use('/product', productRouter);
 app.use('/cart', cartRouter);
+app.use('/cartItems', cartItemsRouter);
 
 app.use((error, req, res, next) => {
   const status = error.status || 500;
