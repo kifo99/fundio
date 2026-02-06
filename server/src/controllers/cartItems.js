@@ -3,26 +3,20 @@ import Cart from '../data/models/Cart.js';
 import ApiError from '../utils/ApiError.js';
 import catchAsync from '../utils/catchAsync.js';
 
-export const getCartItem = async (req, res, next) => {
-  try {
-    const productId = req.params.productId;
-    if (!productId) throw new Error('Product id is not valid');
+export const getCartItem = catchAsync(async (req, res, next) => {
+  const productId = req.params.productId;
+  if (!productId) throw new ApiError('Product id is not valid', 400);
 
-    const item = await CartItems.query()
-      .select('*')
-      .where('productId', '=', productId);
-    if (!item) throw new Error('Item was not found');
+  const item = await CartItems.query()
+    .select('*')
+    .where('productId', '=', productId);
+  if (!item) throw new ApiError('Item was not found', 404);
 
-    res.status(200).json({
-      message: 'Successfully fetched data',
-      item: item,
-    });
-  } catch (error) {
-    res.status(error.statusCode || 500).json({
-      message: error.message,
-    });
-  }
-};
+  res.status(200).json({
+    message: 'Successfully fetched data',
+    item: item,
+  });
+});
 
 export const addToCart = catchAsync(async (req, res, next) => {
   const cartId = req.params.cartId;
