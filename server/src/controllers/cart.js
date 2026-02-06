@@ -20,6 +20,28 @@ export const getCart = async (req, res, next) => {
   }
 };
 
+export const getItems = async (req, res, next) => {
+  try {
+    const cartId = req.params.cartId;
+    if (!cartId) throw new Error('Cart id not valid');
+
+    const cart = await Cart.query().findById(cartId);
+    if (!cart) throw new Error('Cart not found');
+
+    const items = await cart.$relatedQuery('items');
+    if (!items) throw new Error('Items not found');
+
+    res.status(200).json({
+      message: 'Successfully fetched items',
+      items: items,
+    });
+  } catch (error) {
+    res.status(error.statusCode || 500).json({
+      message: `Error: ${error.message}`,
+    });
+  }
+};
+
 // creates user cart
 export const addCart = async (req, res, next) => {
   try {
