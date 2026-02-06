@@ -59,3 +59,21 @@ export const addToCart = async (req, res, next) => {
     });
   }
 };
+
+export const removeFromCart = async (req, res, next) => {
+  try {
+    const itemId = req.params.itemId;
+    if (!itemId) throw new Error('Item id is not valid');
+
+    const item = await CartItems.query().deleteById(itemId);
+    if (!itemId) throw new Error('Item not found');
+
+    res.status(200).json({
+      message: 'Item successfully removed from cart',
+    });
+  } catch (error) {
+    res.status(error.statusCode || 500).json({
+      message: error.message,
+    });
+  }
+};
