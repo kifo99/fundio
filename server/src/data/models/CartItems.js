@@ -1,6 +1,6 @@
 import { Model } from 'objection';
-import Product from './Product';
-import Cart from './Cart';
+import Product from './Product.js';
+import Cart from './Cart.js';
 
 export default class CartItems extends Model {
   static get tableName() {
