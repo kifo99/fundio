@@ -24,47 +24,40 @@ export const getCartItem = async (req, res, next) => {
   }
 };
 
-export const addToCart = async (req, res, next) => {
-  try {
-    const cartId = req.params.cartId;
-    const { productId, quantity } = req.body;
+export const addToCart = catchAsync(async (req, res, next) => {
+  const cartId = req.params.cartId;
+  const { productId, quantity } = req.body;
 
-    if (!cartId) throw new Error('Cart id is not valid');
-    const cart = await Cart.query().findById(cartId);
+  if (!cartId) throw new ApiError('Cart id is not valid!', 400);
+  const cart = await Cart.query().findById(cartId);
 
-    if (!cart) throw new Error('Cart is not found');
-    const items = await cart.$relatedQuery('items');
-    const containsItem = [];
+  if (!cart) throw new ApiError('Cart was not found!', 404);
+  const items = await cart.$relatedQuery('items');
+  const containsItem = [];
 
-    if (!items) throw new Error('No items found');
-    items.forEach((item) => {
-      if (item.productId === productId) containsItem.push(item);
-    });
+  if (!items) throw new ApiError('Items were not found!', 404);
+  items.forEach((item) => {
+    if (item.productId === productId) containsItem.push(item);
+  });
 
-    if (containsItem.length > 0) throw new Error('Product already in cart');
+  if (containsItem.length > 0)
+    throw new ApiError('Product already exist!', 409);
 
-    const item = await CartItems.query().insert({
-      cartId: Number(cartId),
-      productId,
-      quantity,
-    });
+  const item = await CartItems.query().insert({
+    cartId: Number(cartId),
+    productId,
+    quantity,
+  });
 
-    res.status(200).json({
-      message: 'Successfully added to cart',
-      item: item,
-    });
-
-    console.log(containsItem);
-  } catch (error) {
-    res.status(error.statusCode || 500).json({
-      message: error.message,
-    });
-  }
-};
+  res.status(200).json({
+    message: 'Successfully added to cart',
+    item: item,
+  });
+});
 
 export const removeFromCart = catchAsync(async (req, res, next) => {
   const itemId = req.params.itemId;
-  if (!itemId) throw new ApiError('Item id is invalid or does not exist', 404);
+  if (!itemId) throw new ApiError('Item id is not valid', 400);
 
   const item = await CartItems.query().deleteById(itemId);
   if (!itemId) throw new ApiError('Item was not found!', 404);
@@ -73,21 +66,3 @@ export const removeFromCart = catchAsync(async (req, res, next) => {
     message: 'Item successfully removed from cart',
   });
 });
-
-// export const removeFromCart = async (req, res, next) => {
-//   try {
-//     const itemId = req.params.itemId;
-//     if (!itemId) throw new Error('Item id is not valid');
-
-//     const item = await CartItems.query().deleteById(itemId);
-//     if (!itemId) throw new Error('Item not found');
-
-//     res.status(200).json({
-//       message: 'Item successfully removed from cart',
-//     });
-//   } catch (error) {
-//     res.status(error.statusCode || 500).json({
-//       message: error.message,
-//     });
-//   }
-// };
