@@ -1,28 +1,24 @@
 import User from '../data/models/User.js';
 import Product from '../data/models/Product.js';
+import ApiError from '../utils/ApiError.js';
+import catchAsync from '../utils/catchAsync.js';
 
 // Controller for product route that retrieves products vendor created
-export const getVendorsProducts = async (req, res, next) => {
-  try {
-    const vendorId = req.params.vendorId;
-    if (!vendorId) throw new Error('Vendor id was not passed');
+export const getVendorsProducts = catchAsync(async (req, res, next) => {
+  const vendorId = req.params.vendorId;
+  if (!vendorId) throw new ApiError('Vendor id was not valid', 400);
 
-    const vendor = await User.query().findById(vendorId);
-    if (!vendor) throw new Error('Vendor was not found!');
+  const vendor = await User.query().findById(vendorId);
+  if (!vendor) throw new ApiError('Vendor was not found!', 404);
 
-    const products = await vendor.$relatedQuery('products');
-    if (!products) throw new Error('Vendor was not found!');
+  const products = await vendor.$relatedQuery('products');
+  if (!products) throw new ApiError('Vendor was not found!', 404);
 
-    res.status(200).json({
-      message: 'Products vendor created',
-      products: products,
-    });
-  } catch (error) {
-    res.status(error.statusCode || 500).json({
-      message: `Error: ${error.message}`,
-    });
-  }
-};
+  res.status(200).json({
+    message: 'Products vendor created',
+    products: products,
+  });
+});
 
 // Controller for product route that adds products
 export const addProduct = async (req, res, next) => {
