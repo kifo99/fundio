@@ -33,25 +33,19 @@ export const getItems = catchAsync(async (req, res, next) => {
 });
 
 // creates user cart
-export const addCart = async (req, res, next) => {
-  try {
-    const userId = req.params.userId;
-    if (!userId) throw new Error('User id is not valid');
+export const addCart = catchAsync(async (req, res, next) => {
+  const userId = req.params.userId;
+  if (!userId) throw new ApiError('User id is not valid', 400);
 
-    const cart = await Cart.query().insert({
-      userId: Number(userId),
-    });
+  const cart = await Cart.query().insert({
+    userId: Number(userId),
+  });
 
-    res.status(200).json({
-      message: 'Cart created successfully',
-      cart: cart,
-    });
-  } catch (error) {
-    res.status(error.statusCode || 500).json({
-      message: `Error: ${error.message}`,
-    });
-  }
-};
+  res.status(200).json({
+    message: 'Cart created successfully',
+    cart: cart,
+  });
+});
 
 export const deleteCart = async (req, res, next) => {
   try {
