@@ -47,20 +47,14 @@ export const addCart = catchAsync(async (req, res, next) => {
   });
 });
 
-export const deleteCart = async (req, res, next) => {
-  try {
-    const cartId = req.params.cartId;
-    if (!cartId) throw new Error('Cart id is not valid');
+export const deleteCart = catchAsync(async (req, res, next) => {
+  const cartId = req.params.cartId;
+  if (!cartId) throw new ApiError('Cart id is not valid', 400);
 
-    const cart = await Cart.query().deleteById(cartId);
-    if (!cart) throw new Error('Cart not found');
+  const cart = await Cart.query().deleteById(cartId);
+  if (!cart) throw new ApiError('Cart not found', 404);
 
-    res.status(200).json({
-      message: 'Cart deleted.',
-    });
-  } catch (error) {
-    res.status(error.statusCode || 500).json({
-      message: `Error: ${error.message}`,
-    });
-  }
-};
+  res.status(200).json({
+    message: 'Cart deleted.',
+  });
+});
