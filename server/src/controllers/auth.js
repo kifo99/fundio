@@ -13,7 +13,7 @@ export const signup = catchAsync(async (req, res, next) => {
   const { firstName, lastName, email, password } = req.body;
   const errors = validationResult(req);
   const error = errors.formatWith((error) => error.msg);
-  if (!errors.isEmpty()) throw new Error(error.array());
+  if (!errors.isEmpty()) throw new ApiError('Internal server error', 500);
 
   const hashedPassword = await bcrypt.hash(password, Number(process.env.SALT));
 
@@ -50,42 +50,35 @@ export const signup = catchAsync(async (req, res, next) => {
 });
 
 // login function
-export async function login(req, res, next) {
-  try {
-    const { email, password } = req.body;
-    const errors = validationResult(req);
+export const login = catchAsync(async (req, res, next) => {
+  const { email, password } = req.body;
+  const errors = validationResult(req);
 
-    if (!errors.isEmpty()) throw new Error('There has been an error');
+  if (!errors.isEmpty()) throw new ApiError('Internal server error', 500);
 
-    const user = await User.query().findOne({ email });
+  const user = await User.query().findOne({ email });
+  if (!user) throw new ApiError('User has not been found', 404);
 
-    if (!user) throw new Error('User has not been found');
+  const decryptedPassword = await bcrypt.compare(password, user.password);
 
-    const decryptedPassword = await bcrypt.compare(password, user.password);
+  if (!decryptedPassword) throw new ApiError('Wrong password!', 400);
 
-    if (!decryptedPassword) throw new Error('Wrong password!');
-
-    const token = jwt.sign(
-      {
-        email: user.email,
-        userId: user.id,
-      },
-      process.env.SECRET_KEY,
-      { expiresIn: '1h' }
-    );
-    res.status(200).json({
-      message: `Welcome: ${user.firstName}`,
-      token: token,
-      user: user,
+  const token = jwt.sign(
+    {
+      email: user.email,
       userId: user.id,
-    });
+    },
+    process.env.SECRET_KEY,
+    { expiresIn: '1h' }
+  );
+  res.status(200).json({
+    message: `Welcome: ${user.firstName}`,
+    token: token,
+    user: user,
+    userId: user.id,
+  });
 
-    res.status(404).json({
-      message: 'Unable to login credentials do not match',
-    });
-  } catch (error) {
-    res.status(error.statusCode || 500).json({
-      message: error.message,
-    });
-  }
-}
+  res.status(404).json({
+    message: 'Unable to login credentials do not match',
+  });
+});
