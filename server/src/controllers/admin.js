@@ -2,26 +2,18 @@ import User from '../data/models/User.js';
 import ApiError from '../utils/ApiError.js';
 import catchAsync from '../utils/catchAsync.js';
 
-export async function getVendor(req, res, next) {
-  try {
-    const { id } = req.params;
+export const getVendor = catchAsync(async (req, res, next) => {
+  const { id } = req.params;
+  if (!id) throw new ApiError('User id not valid', 400);
 
-    if (!id) throw new Error('Id not found');
+  const user = await User.query().findById(id);
+  if (!user) throw new ApiError('User not found', 404);
 
-    const user = await User.query().findById(id);
-
-    if (!user) throw new Error('User not found');
-
-    res.status(200).json({
-      message: `User: ${user.firstName} ${user.lastName}`,
-      user: user,
-    });
-  } catch (error) {
-    res.status(error.statusCode || 500).json({
-      message: error.message,
-    });
-  }
-}
+  res.status(200).json({
+    message: `User: ${user.firstName} ${user.lastName}`,
+    user: user,
+  });
+});
 
 export const verifyVendor = catchAsync(async (req, res, next) => {
   const { id } = req.params;
