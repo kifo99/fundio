@@ -42,20 +42,14 @@ export const addProduct = catchAsync(async (req, res, next) => {
 });
 
 // Controller for product route that delete products
-export const deleteProduct = async (req, res, next) => {
-  try {
-    const productId = req.params.productId;
-    if (!productId) throw new Error('Product id was not passed');
+export const deleteProduct = catchAsync(async (req, res, next) => {
+  const productId = req.params.productId;
 
-    const product = await Product.query().deleteById(productId);
+  if (!productId) throw new Error('Product id was not valid', 400);
+  const product = await Product.query().deleteById(productId);
 
-    res.status(200).json({ message: 'Product deleted successfully' });
-  } catch (error) {
-    res.status(error.statusCode || 500).json({
-      message: `Error: ${error.message}`,
-    });
-  }
-};
+  res.status(200).json({ message: 'Product deleted successfully' });
+});
 
 // Controller for product route that edit products
 export const editProduct = async (req, res, next) => {
