@@ -16,27 +16,21 @@ export const getCart = catchAsync(async (req, res, next) => {
   });
 });
 
-export const getItems = async (req, res, next) => {
-  try {
-    const cartId = req.params.cartId;
-    if (!cartId) throw new Error('Cart id not valid');
+export const getItems = catchAsync(async (req, res, next) => {
+  const cartId = req.params.cartId;
+  if (!cartId) throw new ApiError('Cart id not valid', 400);
 
-    const cart = await Cart.query().findById(cartId);
-    if (!cart) throw new Error('Cart not found');
+  const cart = await Cart.query().findById(cartId);
+  if (!cart) throw new ApiError('Cart not found', 404);
 
-    const items = await cart.$relatedQuery('items');
-    if (!items) throw new Error('Items not found');
+  const items = await cart.$relatedQuery('items');
+  if (!items) throw new ApiError('Items not found', 404);
 
-    res.status(200).json({
-      message: 'Successfully fetched items',
-      items: items,
-    });
-  } catch (error) {
-    res.status(error.statusCode || 500).json({
-      message: `Error: ${error.message}`,
-    });
-  }
-};
+  res.status(200).json({
+    message: 'Successfully fetched items',
+    items: items,
+  });
+});
 
 // creates user cart
 export const addCart = async (req, res, next) => {
