@@ -21,33 +21,25 @@ export const getVendorsProducts = catchAsync(async (req, res, next) => {
 });
 
 // Controller for product route that adds products
-export const addProduct = async (req, res, next) => {
-  try {
-    const vendorId = req.params.vendorId;
-    console.log(typeof vendorId);
-    const { productName, price, productImg, description, discount } = req.body;
+export const addProduct = catchAsync(async (req, res, next) => {
+  const vendorId = req.params.vendorId;
+  const { productName, price, productImg, description, discount } = req.body;
 
-    if (!vendorId) throw new Error('Vendor id was not passed');
+  if (!vendorId) throw new ApiError('Vendor id was not valid', 400);
+  const product = await Product.query().insert({
+    vendorId: Number(vendorId),
+    productName,
+    price,
+    productImg,
+    description,
+    discount,
+  });
 
-    const product = await Product.query().insert({
-      vendorId: Number(vendorId),
-      productName,
-      price,
-      productImg,
-      description,
-      discount,
-    });
-
-    res.status(200).json({
-      message: 'Successfully added product',
-      product: product,
-    });
-  } catch (error) {
-    res.status(error.statusCode || 500).json({
-      message: `Error: ${error.message}`,
-    });
-  }
-};
+  res.status(200).json({
+    message: 'Successfully added product',
+    product: product,
+  });
+});
 
 // Controller for product route that delete products
 export const deleteProduct = async (req, res, next) => {
