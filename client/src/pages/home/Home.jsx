@@ -1,8 +1,8 @@
 import { useDispatch } from 'react-redux';
 import { useRef } from 'react';
-import { Section } from '../section/Section.jsx';
-import { CardGrid } from '../card/CardGrid.jsx';
-import { ProductCard } from '../product-card/ProductCard.jsx';
+import { Section } from '../../components/section/Section.jsx';
+import { CardGrid } from '../../components/card/CardGrid.jsx';
+import { ProductCard } from '../../components/product-card/ProductCard.jsx';
 import { useNavigate } from 'react-router';
 import './home.scss';
 export function Home() {
@@ -37,6 +37,27 @@ export function Home() {
       </Section>
       <Section>
         <CardGrid title={'Top selling products!'}>
+          <ProductCard
+            imgUrl={
+              '../../../public/img/home-images/andres-carreno-RqS7r2CzL68-unsplash.jpg'
+            }
+            productName={'Tomato'}
+            price={'2.2'}
+          />
+          <ProductCard
+            imgUrl={
+              '../../../public/img/home-images/andres-carreno-RqS7r2CzL68-unsplash.jpg'
+            }
+            productName={'Tomato'}
+            price={'2.2'}
+          />
+          <ProductCard
+            imgUrl={
+              '../../../public/img/home-images/andres-carreno-RqS7r2CzL68-unsplash.jpg'
+            }
+            productName={'Tomato'}
+            price={'2.2'}
+          />
           <ProductCard
             imgUrl={
               '../../../public/img/home-images/andres-carreno-RqS7r2CzL68-unsplash.jpg'

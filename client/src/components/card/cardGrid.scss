@@ -24,7 +24,9 @@
   }
 
   &__body {
-    display: flex;
-    justify-content: space-between;
+    margin: 45px auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
   }
 }
