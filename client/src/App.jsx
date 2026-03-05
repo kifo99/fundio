@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigation } from './components/navigation/Navigation';
-import { Login } from './components/auth/login/Login';
-import { Signup } from './components/auth/signup/Signup';
-import { Home } from './components/home/Home';
+import { Login } from './pages/auth/login/Login';
+import { Signup } from './pages/auth/signup/Signup';
+import { Home } from './pages/home/Home';
 import { Route, Routes } from 'react-router';
 import { persistor } from './store/store';
 
