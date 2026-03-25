@@ -3,6 +3,17 @@ import Product from '../data/models/Product.js';
 import ApiError from '../utils/ApiError.js';
 import catchAsync from '../utils/catchAsync.js';
 
+// Controller for product route that retrieves all products
+export const getProducts = catchAsync(async (req, res, next) => {
+  const products = await Product.query().select('*');
+  if (!products) throw new ApiError('Products not found', 404);
+
+  res.status(200).json({
+    message: 'Products fetched',
+    products: products,
+  });
+});
+
 // Controller for product route that retrieves products vendor created
 export const getVendorsProducts = catchAsync(async (req, res, next) => {
   const vendorId = req.params.vendorId;

@@ -1,5 +1,6 @@
 import express from 'express';
 import {
+  getProducts,
   addProduct,
   deleteProduct,
   editProduct,
@@ -7,6 +8,8 @@ import {
 } from '../controllers/product.js';
 const route = express.Router();
 
+//route to retrieve all products
+route.get('/products', getProducts);
 // route to retrieve all products that vendor created
 route.get('/vendors/:vendorId/products', getVendorsProducts);
 
