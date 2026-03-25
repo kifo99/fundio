@@ -1,15 +1,19 @@
-import { useDispatch } from 'react-redux';
 import { useRef } from 'react';
 import { Section } from '../../components/section/Section.jsx';
 import { CardGrid } from '../../components/card/CardGrid.jsx';
 import { ProductCard } from '../../components/product-card/ProductCard.jsx';
 import { useNavigate } from 'react-router';
 import './home.scss';
+
+import { useGetProducts } from '../../queries/product.queries.js';
+
 export function Home() {
-  const dispatch = useDispatch();
   const backTextRef = useRef();
-  const aboutRef = useRef();
   const navigate = useNavigate();
+
+  const { data: products, productsIsLoading } = useGetProducts();
+
+  if (productsIsLoading) return <div>Loading...</div>;
 
   return (
     <article className="section--wrapper">
@@ -37,62 +41,20 @@ export function Home() {
       </Section>
       <Section>
         <CardGrid title={'Top selling products!'}>
-          <ProductCard
-            imgUrl={
-              '../../../public/img/home-images/andres-carreno-RqS7r2CzL68-unsplash.jpg'
-            }
-            productName={'Tomato'}
-            price={'2.2'}
-          />
-          <ProductCard
-            imgUrl={
-              '../../../public/img/home-images/andres-carreno-RqS7r2CzL68-unsplash.jpg'
-            }
-            productName={'Tomato'}
-            price={'2.2'}
-          />
-          <ProductCard
-            imgUrl={
-              '../../../public/img/home-images/andres-carreno-RqS7r2CzL68-unsplash.jpg'
-            }
-            productName={'Tomato'}
-            price={'2.2'}
-          />
-          <ProductCard
-            imgUrl={
-              '../../../public/img/home-images/andres-carreno-RqS7r2CzL68-unsplash.jpg'
-            }
-            productName={'Tomato'}
-            price={'2.2'}
-          />
-          <ProductCard
-            imgUrl={
-              '../../../public/img/home-images/andres-carreno-RqS7r2CzL68-unsplash.jpg'
-            }
-            productName={'Tomato'}
-            price={'2.2'}
-          />
-          <ProductCard
-            imgUrl={
-              '../../../public/img/home-images/andres-carreno-RqS7r2CzL68-unsplash.jpg'
-            }
-            productName={'Tomato'}
-            price={'2.2'}
-          />
-          <ProductCard
-            imgUrl={
-              '../../../public/img/home-images/andres-carreno-RqS7r2CzL68-unsplash.jpg'
-            }
-            productName={'Tomato'}
-            price={'2.2'}
-          />
-          <ProductCard
-            imgUrl={
-              '../../../public/img/home-images/andres-carreno-RqS7r2CzL68-unsplash.jpg'
-            }
-            productName={'Tomato'}
-            price={'2.2'}
-          />
+          {!products ? (
+            <div>Loading...</div>
+          ) : (
+            products.map((product) => {
+              return (
+                <ProductCard
+                  key={product.id}
+                  imgUrl={product.productImg}
+                  productName={product.productName}
+                  price={product.productPrice}
+                />
+              );
+            })
+          )}
         </CardGrid>
       </Section>
       <Section>
