@@ -22,7 +22,9 @@ Fundio is a local marketplace platform connecting local producers — food selle
 
 ## Tech Stack
 
-**Backend:** Node.js, Express, MongoDB
+**Backend:** Node.js, Express, PostgreSQL
+
+**Infrastructure:** Docker
 
 **Frontend:** React, SCSS *(in progress)*
 
