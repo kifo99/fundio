@@ -1,24 +1,21 @@
 import User from '../data/models/User.js';
+import ApiError from '../utils/ApiError.js';
+import catchAsync from '../utils/catchAsync.js';
 
-export async function uploadImg(req, res, next) {
-  try {
-    const profilePic = req.file;
-    const userId = req.params.id;
+export const uploadImg = catchAsync(async (req, res, next) => {
+  const profilePic = req.file;
+  const userId = req.params.id;
 
-    if (!profilePic || !userId) throw new Error('There has been an error!');
+  if (!userId) throw new ApiError('User id was not valid', 400);
 
-    const user = await User.query().findById(userId);
+  const user = await User.query().findById(userId);
 
-    if (!user) throw new Error('User not found!');
+  if (!user) throw new ApiError('User not found!', 404);
 
-    await user.$query().patch({ profilePic: profilePic.destination });
+  if (!profilePic) throw new ApiError('Profile picture was not passed', 400);
+  await user.$query().patch({ profilePic: profilePic.destination });
 
-    res.status(200).json({
-      message: 'Profile picture has been uploaded',
-    });
-  } catch (error) {
-    res.status(error.statusCode || 500).json({
-      message: `Error: ${error.message}`,
-    });
-  }
-}
+  res.status(200).json({
+    message: 'Profile picture has been uploaded',
+  });
+});

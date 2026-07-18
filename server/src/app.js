@@ -7,6 +7,11 @@ import bodyParser from 'body-parser';
 import userRoutes from './routes/user.js';
 import authRoutes from './routes/auth.js';
 import uploadRouter from './routes/uploads.js';
+import adminRouter from './routes/admin.js';
+import productRouter from './routes/product.js';
+import cartRouter from './routes/cart.js';
+import cartItemsRouter from './routes/cartItems.js';
+import errorHandler from './middleware/errorHandler.js';
 const app = express();
 
 app.use(helmet());
@@ -26,20 +31,11 @@ app.use(limiter);
 app.use('/user', userRoutes);
 app.use('/auth', authRoutes);
 app.use('/upload', uploadRouter);
+app.use('/admin', adminRouter);
+app.use('/product', productRouter);
+app.use('/cart', cartRouter);
+app.use('/cartItems', cartItemsRouter);
 
-app.use((error, req, res, next) => {
-  const status = error.status || 500;
-  const message = error.message || 'There has been an error. Please try again.';
-  const data = error.data;
-
-  if (typeof status === 'number' || status < 100 || status > 500) {
-    console.error('Invalid status code!');
-  }
-
-  res.status(status).json({
-    message: message,
-    data: data,
-  });
-});
+app.use(errorHandler);
 
 export default app;

@@ -1,0 +1,12 @@
+@use './styles/abstracts/variables' as v;
+
+* {
+  font-family: v.$primary-font;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: v.$primary-bg-color;
+}

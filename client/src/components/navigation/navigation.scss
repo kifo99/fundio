@@ -1,0 +1,47 @@
+.navbar {
+  z-index: 10000;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  height: 80px;
+  background-color: transparent;
+  color: #807e7e;
+  display: grid;
+  justify-content: space-around;
+  grid-template-columns: auto auto auto;
+  align-items: center;
+}
+
+.navbar-menu a {
+  color: inherit;
+}
+.navbar-actions-list {
+  display: grid;
+  justify-content: space-around;
+  grid-template-columns: auto auto auto;
+  align-items: center;
+}
+
+.navbar-action-item {
+  list-style: none;
+  padding: 10px;
+}
+
+.navbar-action-item a {
+  color: #807e7e;
+}
+
+.navbar:hover {
+  -moz-transition: all 0.5s ease-in;
+  -o-transition: all 0.5s ease-in;
+  -webkit-transition: all 0.5s ease-in;
+  transition: all 0.5s ease-in;
+  background-color: white;
+}
+.navbar-action-item-icon:hover {
+  -moz-transition: all 0.3s ease-in;
+  -o-transition: all 0.3s ease-in;
+  -webkit-transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in;
+  color: red;
+}

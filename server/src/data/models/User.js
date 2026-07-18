@@ -1,5 +1,5 @@
-import { type } from 'node:os';
 import { Model } from 'objection';
+import Product from './Product.js';
 
 export default class User extends Model {
   static get tableName() {
@@ -28,6 +28,19 @@ export default class User extends Model {
         vendorStatus: {
           type: 'string',
           enum: ['unverified', 'verified', 'pending', 'rejected'],
+        },
+      },
+    };
+  }
+
+  static get relationMappings() {
+    return {
+      products: {
+        relation: Model.HasManyRelation,
+        modelClass: Product,
+        join: {
+          from: 'user.id',
+          to: 'product.vendorId',
         },
       },
     };
