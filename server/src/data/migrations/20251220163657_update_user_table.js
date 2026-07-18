@@ -1,23 +1,16 @@
 export const up = async function (knex) {
-  await knex.schema.createTable('user', (table) => {
-    table.increments('id').primary();
-    table.string('firstName').notNullable();
-    table.string('lastName').notNullable();
-    table.string('email').notNullable().unique();
-    table.string('password').notNullable();
-    table.timestamp('createdAt').defaultTo(knex.fn.now());
-    table.string('profilePic');
-    table.boolean('emailVerified').defaultTo(false);
-    table.specificType('role', 'user_role').notNullable().defaultTo('user');
+  await knex.schema.alterTable("user", (table) => {
+    table.boolean("emailVerified").defaultTo(false);
     table
-      .specificType('vendorStatus', 'vendor_status')
+      .specificType("vendorStatus", "vendor_status")
       .notNullable()
-      .defaultTo('unverified');
+      .defaultTo("unverified");
   });
 };
 
 export const down = async function (knex) {
-  await knex.schema.dropTable('user');
-  await knex.raw(`DROP TYPE user_role`);
-  await knex.raw(`DROP TYPE vendor_status`);
+  await knex.schema.alterTable("user", (table) => {
+    table.dropColumn("emailVerified");
+    table.dropColumn("vendorStatus");
+  });
 };
