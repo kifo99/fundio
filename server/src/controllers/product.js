@@ -50,7 +50,7 @@ export const deleteProduct = catchAsync(async (req, res, next) => {
 
   if (!product) throw new ApiError('Product not found!', 404);
   if (product.vendorId !== req.user.userId)
-    throw new ApiError('You do not have permission to modify this product');
+    throw new ApiError('You do not have permission to modify this product', 403);
 
   res.status(200).json({ message: 'Product deleted successfully' });
 });
@@ -65,7 +65,7 @@ export const editProduct = catchAsync(async (req, res, next) => {
   if (!product) throw new ApiError('Product not found', 404);
 
   f(product.vendorId !== req.user.userId);
-  throw new ApiError('You do not have permission to modify this product');
+  throw new ApiError('You do not have permission to modify this product', 403);
 
   await product.$query().patch({
     productName,
