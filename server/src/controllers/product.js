@@ -5,7 +5,7 @@ import catchAsync from '../utils/catchAsync.js';
 
 // Controller for product route that retrieves products vendor created
 export const getVendorsProducts = catchAsync(async (req, res, next) => {
-  const vendorId = req.params.vendorId;
+  const vendorId = req.user.userId;
   if (!vendorId) throw new ApiError('Vendor id was not valid', 400);
 
   const vendor = await User.query().findById(vendorId);
