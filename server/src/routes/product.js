@@ -5,18 +5,19 @@ import {
   editProduct,
   getVendorsProducts,
 } from '../controllers/product.js';
+import { authenticate } from '../middleware/authentication.js';
 const route = express.Router();
 
 // route to retrieve all products that vendor created
-route.get('/vendors/:vendorId/products', getVendorsProducts);
+route.get('/vendors/:vendorId/products', authenticate, getVendorsProducts);
 
 // route that will create product
-route.post('/vendors/:vendorId/product', addProduct);
+route.post('/vendors/:vendorId/product', authenticate, addProduct);
 
 // route that will remove product
-route.delete('/products/:productId', deleteProduct);
+route.delete('/products/:productId', authenticate, deleteProduct);
 
 // route that will edit product
-route.put('/products/:productId', editProduct);
+route.put('/products/:productId', authenticate, editProduct);
 
 export default route;
