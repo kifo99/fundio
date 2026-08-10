@@ -61,9 +61,7 @@ export function Signup() {
         action="post"
         onSubmit={signupType === 'user' ? handleSignup : handleVendorSignup}
       >
-        <h1 className="signup-title">
-          {signupType === 'user' ? 'SIGN UP' : 'SIGN UP AS VENDOR'}
-        </h1>
+        <h1 className="signup-title">{signupType === 'user' ? 'SIGN UP' : 'SIGN UP AS VENDOR'}</h1>
         <div className="input-group">
           <label htmlFor="firstName">FIRST NAME</label>
           <input
@@ -71,9 +69,7 @@ export function Signup() {
             id="firstName"
             name="firstName"
             placeholder="Your name"
-            onChange={(e) =>
-              setUserInput({ ...userInput, firstName: e.target.value })
-            }
+            onChange={(e) => setUserInput({ ...userInput, firstName: e.target.value })}
           />
         </div>
         <div className="input-group">
@@ -83,9 +79,7 @@ export function Signup() {
             id="lastName"
             name="lastName"
             placeholder="Your last name"
-            onChange={(e) =>
-              setUserInput({ ...userInput, lastName: e.target.value })
-            }
+            onChange={(e) => setUserInput({ ...userInput, lastName: e.target.value })}
           />
         </div>
         <div className="input-group">
@@ -95,9 +89,7 @@ export function Signup() {
             id="email"
             name="email"
             placeholder="your@email.com"
-            onChange={(e) =>
-              setUserInput({ ...userInput, email: e.target.value })
-            }
+            onChange={(e) => setUserInput({ ...userInput, email: e.target.value })}
           />
         </div>
         <div className="input-group">
@@ -107,21 +99,17 @@ export function Signup() {
             id="password"
             name="password"
             placeholder="********"
-            onChange={(e) =>
-              setUserInput({ ...userInput, password: e.target.value })
-            }
+            onChange={(e) => setUserInput({ ...userInput, password: e.target.value })}
           />
         </div>
         <div className="input-group">
-          <label htmlFor="confirmPassword">CONFIRM PASSWORD</label>
+          <label htmlFor="password">CONFIRM PASSWORD</label>
           <input
             type="confirmPassword"
             id="confirmPassword"
             name="confirmPassword"
             placeholder="********"
-            onChange={(e) =>
-              setUserInput({ ...userInput, confirmPassword: e.target.value })
-            }
+            onChange={(e) => setUserInput({ ...userInput, confirmPassword: e.target.value })}
           />
         </div>
 
@@ -132,9 +120,7 @@ export function Signup() {
 
             <div className="signup-footer">
               Want to sell your own products?{' '}
-              <span onClick={() => setSignupType('vendor')}>
-                Sign up as Vendor
-              </span>
+              <span onClick={() => setSignupType('vendor')}>Sign up as Vendor</span>
             </div>
           </>
         ) : (
@@ -142,8 +128,7 @@ export function Signup() {
             <div className="divider"></div>
 
             <div className="signup-footer">
-              Go back to?{' '}
-              <span onClick={() => setSignupType('user')}>Sign up</span>
+              Go back to? <span onClick={() => setSignupType('user')}>Sign up</span>
             </div>
           </>
         )}

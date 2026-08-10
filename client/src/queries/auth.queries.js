@@ -24,7 +24,7 @@ const signup = async function (data) {
     if (!data) throw new Error('No data has been passed!');
 
     const response = await axios({
-      method: 'put',
+      method: 'post',
       url: 'http://localhost:8080/auth/signup',
       headers: {},
       data: data,
@@ -42,7 +42,7 @@ const signupVendor = async function (data) {
     if (!data) throw new Error('No data has been passed!');
 
     const response = await axios({
-      method: 'put',
+      method: 'post',
       url: 'http://localhost:8080/auth/signup/vendor',
       headers: {},
       data: data,
@@ -74,7 +74,6 @@ export const useSignup = () => {
     mutationFn: signup,
     onSuccess: (data) => {
       console.log('User signed up!', data);
-
       return data;
     },
     onError: (error) => {
