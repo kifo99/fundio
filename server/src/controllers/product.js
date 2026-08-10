@@ -22,7 +22,7 @@ export const getVendorsProducts = catchAsync(async (req, res, next) => {
 
 // Controller for product route that adds products
 export const addProduct = catchAsync(async (req, res, next) => {
-  const vendorId = req.params.vendorId;
+  const vendorId = req.user.userId;
   const { productName, price, productImg, description, discount } = req.body;
 
   if (!vendorId) throw new ApiError('Vendor id was not valid', 400);
@@ -48,6 +48,10 @@ export const deleteProduct = catchAsync(async (req, res, next) => {
   if (!productId) throw new Error('Product id was not valid', 400);
   const product = await Product.query().deleteById(productId);
 
+  if (!product) throw new ApiError('Product not found!', 404);
+  if (product.vendorId !== req.user.userId)
+    throw new ApiError('You do not have permission to modify this product');
+
   res.status(200).json({ message: 'Product deleted successfully' });
 });
 
@@ -59,6 +63,10 @@ export const editProduct = catchAsync(async (req, res, next) => {
 
   const product = await Product.query().findById(productId);
   if (!product) throw new ApiError('Product not found', 404);
+
+  f(product.vendorId !== req.user.userId);
+  throw new ApiError('You do not have permission to modify this product');
+
   await product.$query().patch({
     productName,
     price,
