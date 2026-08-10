@@ -4,7 +4,7 @@ import catchAsync from '../utils/catchAsync.js';
 
 // retrieves user cart
 export const getCart = catchAsync(async (req, res, next) => {
-  const userId = req.params.userId;
+  const userId = req.user.userId;
   if (!userId) throw new ApiError('User id is not valid', 400);
 
   const cart = await Cart.query().select('*').where('userId', '=', userId);
@@ -34,7 +34,7 @@ export const getItems = catchAsync(async (req, res, next) => {
 
 // creates user cart
 export const addCart = catchAsync(async (req, res, next) => {
-  const userId = req.params.userId;
+  const userId = req.user.userId;
   if (!userId) throw new ApiError('User id is not valid', 400);
 
   const cart = await Cart.query().insert({
@@ -53,6 +53,9 @@ export const deleteCart = catchAsync(async (req, res, next) => {
 
   const cart = await Cart.query().deleteById(cartId);
   if (!cart) throw new ApiError('Cart not found', 404);
+
+  if (cart.userId !== req.user.userId)
+    throw new ApiError('You do not have permission to modify this cart', 403);
 
   res.status(200).json({
     message: 'Cart deleted.',
