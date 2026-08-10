@@ -64,7 +64,7 @@ export const editProduct = catchAsync(async (req, res, next) => {
   const product = await Product.query().findById(productId);
   if (!product) throw new ApiError('Product not found', 404);
 
-  f(product.vendorId !== req.user.userId);
+  if (product.vendorId !== req.user.userId);
   throw new ApiError('You do not have permission to modify this product', 403);
 
   await product.$query().patch({
