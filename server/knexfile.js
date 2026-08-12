@@ -1,12 +1,32 @@
-import 'dotenv/config';
+import dotenv from 'dotenv';
 
-const url = process.env.NODE_ENV === 'development' ? process.env.DATABASE_URL_DEV : process.env.DATABASE_URL_PROD;
-console.log(process.env.DATABASE_URL);
+const env = process.env.NODE_ENV || 'development';
+
+dotenv.config({
+  path: env === 'test' ? '.env.test' : '.env',
+});
+
+const urls = {
+  development: process.env.DATABASE_URL_DEV,
+  test: process.env.DATABASE_URL_TEST,
+  production: process.env.DATABASE_URL_PROD,
+};
+
 export default {
   development: {
     client: 'pg',
     connection: {
-      connectionString: url,
+      connectionString: urls.development,
+    },
+    migrations: {
+      directory: './src/data/migrations',
+    },
+  },
+
+  test: {
+    client: 'pg',
+    connection: {
+      connectionString: urls.test,
     },
     migrations: {
       directory: './src/data/migrations',
@@ -16,7 +36,7 @@ export default {
   production: {
     client: 'pg',
     connection: {
-      connectionString: url,
+      connectionString: urls.production,
     },
     pool: {
       min: 2,
