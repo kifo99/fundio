@@ -18,6 +18,6 @@ route.post('/', authenticate, addProduct);
 route.delete('/products/:productId', authenticate, deleteProduct);
 
 // route that will edit product
-route.put('/products/:productId', authenticate, editProduct);
+route.patch('/products/:productId', authenticate, editProduct);
 
 export default route;

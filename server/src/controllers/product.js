@@ -25,7 +25,7 @@ export const addProduct = catchAsync(async (req, res, next) => {
   const vendorId = req.user.userId;
   const { productName, price, productImg, description, discount } = req.body;
 
-  if (!vendorId) throw new ApiError('Vendor id was not valid', 400);
+  if (!vendorId) throw new ApiError('Vendor id was not valid', 401);
   const product = await Product.query().insert({
     vendorId: Number(vendorId),
     productName,
@@ -35,7 +35,7 @@ export const addProduct = catchAsync(async (req, res, next) => {
     discount,
   });
 
-  res.status(200).json({
+  res.status(201).json({
     message: 'Successfully added product',
     product: product,
   });
@@ -46,11 +46,13 @@ export const deleteProduct = catchAsync(async (req, res, next) => {
   const productId = req.params.productId;
 
   if (!productId) throw new Error('Product id was not valid', 400);
-  const product = await Product.query().deleteById(productId);
 
+  const product = await Product.query().findById(productId);
   if (!product) throw new ApiError('Product not found!', 404);
   if (product.vendorId !== req.user.userId)
     throw new ApiError('You do not have permission to modify this product', 403);
+
+  await product.$query().delete();
 
   res.status(200).json({ message: 'Product deleted successfully' });
 });
@@ -64,19 +66,17 @@ export const editProduct = catchAsync(async (req, res, next) => {
   const product = await Product.query().findById(productId);
   if (!product) throw new ApiError('Product not found', 404);
 
-  if (product.vendorId !== req.user.userId);
-  throw new ApiError('You do not have permission to modify this product', 403);
+  if (product.vendorId !== req.user.userId)
+    throw new ApiError('You do not have permission to modify this product', 403);
 
-  await product.$query().patch({
-    productName,
-    price,
-    productImg,
-    description,
-    discount,
-  });
+  const updates = Object.fromEntries(
+    Object.entries(req.body).filter(([key, value]) => value !== undefined),
+  );
+
+  const updatedProduct = await product.$query().patchAndFetch(updates);
 
   res.status(200).json({
     message: 'Successfully added product',
-    product: product,
+    product: updatedProduct,
   });
 });
