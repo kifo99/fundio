@@ -1,3 +1,5 @@
+import { Label } from '../../../components/form/Label.jsx';
+
 export function SignupTest() {
   // AuthForm component <
   //    FormField <
@@ -7,4 +9,6 @@ export function SignupTest() {
   //    >
   //
   // >
+
+  return <Label>Label</Label>;
 }

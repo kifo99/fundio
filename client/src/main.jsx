@@ -8,6 +8,7 @@ import './style.scss';
 import { persistor } from './store/store.js';
 import store from './store/store.js';
 import App from './App.jsx';
+import './index.css';
 
 const root = document.getElementById('root');
 const queryClient = new QueryClient();
@@ -23,5 +24,5 @@ createRoot(root).render(
         </PersistGate>
       </Provider>
     </QueryClientProvider>
-  </StrictMode>
+  </StrictMode>,
 );
