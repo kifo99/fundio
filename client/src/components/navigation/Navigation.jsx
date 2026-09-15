@@ -1,36 +1,42 @@
 import { Menu, Globe, CircleUser, ShoppingBasket } from 'lucide-react';
-import { useNavigate, Link } from 'react-router';
-import './navigation.scss';
+import { Link } from 'react-router';
 
 export function Navigation() {
-  let navigate = useNavigate();
-
   return (
-    <div className="navbar">
+    <div className="fixed top-0 z-50 w-full min-h-20 bg-transparent text-[#807e7e] grid grid-cols-[auto_auto_auto] justify-around items-center transition-colors duration-500 ease-in hover:bg-white">
       {/* Menu section */}
-      <div className="navbar-menu">
-        <Menu className="navbar-action-item-icon" size={24} />
+      <div className="text-inherit">
+        <Menu className="transition-colors duration-300 ease-in hover:text-red-600" size={24} />
       </div>
       {/* Web site title section */}
-      <div className="navbar-brand">
+      <div>
         <h1>fundio</h1>
       </div>
       {/* Auth/Language/Cart section */}
-      <div className="navbar-actions">
+      <div>
         <nav>
-          <ul className="navbar-actions-list">
-            <li className="navbar-action-item">
-              <Globe className="navbar-action-item-icon" size={24} />
+          <ul className="grid justify-around grid-cols-[auto_auto_auto] items-center">
+            <li className="list-none p-2.5">
+              <Globe
+                className="transition-colors duration-300 ease-in hover:text-red-600"
+                size={24}
+              />
             </li>
 
-            <li className="navbar-action-item">
+            <li className="list-none p-2.5">
               <Link to="/login">
-                <CircleUser className="navbar-action-item-icon" size={24} />
+                <CircleUser
+                  className="transition-colors duration-300 ease-in hover:text-red-600"
+                  size={24}
+                />
               </Link>
             </li>
-            <li className="navbar-action-item">
+            <li className="list-none p-2.5">
               <Link to="cart">
-                <ShoppingBasket className="navbar-action-item-icon" size={24} />
+                <ShoppingBasket
+                  className="transition-colors duration-300 ease-in hover:text-red-600"
+                  size={24}
+                />
               </Link>
             </li>
           </ul>
