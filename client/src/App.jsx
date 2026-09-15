@@ -37,11 +37,13 @@ function App() {
   return (
     <div>
       <Navigation />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignupTest />} />
-      </Routes>
+      <main className="pt-20">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignupTest />} />
+        </Routes>
+      </main>
     </div>
   );
 }
