@@ -11,9 +11,9 @@ export function SignupTest() {
   // >
 
   return (
-    <div className="flex flex-col md:flex-row lg:flex-row justify-center items-center h-auto m-auto w-full sm:w-2/3 md:w-1/2 lg:w-1/2 m-auto">
+    <div className="flex flex-col md:flex-row justify-center items-center h-auto w-full sm:w-2/3 md:w-1/2 lg:w-1/2 m-auto">
       <SignupForm />
-      <div className="flex flex-col m-auto p-10 w-1/2 justify-center items-center">
+      <div className="flex flex-col m-auto p-10 w-full md:w-1/2 justify-center items-center">
         <h1>Welcome</h1>
         <div>
           <p>

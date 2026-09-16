@@ -37,7 +37,7 @@ function App() {
   return (
     <div>
       <Navigation />
-      <main className="pt-20">
+      <main className="md:pt-20">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
