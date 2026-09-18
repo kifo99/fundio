@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Navigation } from './components/navigation/Navigation';
 import { Login } from './pages/auth/login/Login';
 import { Signup } from './pages/auth/signup/Signup';
-import { SignupTest } from './pages/auth/signup/SignupTest';
+import { Auth } from './pages/auth/signup/Auth';
 import { Home } from './pages/home/Home';
 import { Route, Routes } from 'react-router';
 import { persistor } from './store/store';
@@ -41,7 +41,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignupTest />} />
+          <Route path="/signup" element={<Auth />} />
         </Routes>
       </main>
     </div>
