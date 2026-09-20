@@ -73,7 +73,7 @@ export function Navigation() {
           </li>
 
           <li className="flex items-center gap-3">
-            <Link to="/login" onClick={() => setIsOpen(false)}>
+            <Link to="/auth" onClick={() => setIsOpen(false)}>
               <CircleUser
                 className="transition-colors duration-300 ease-in hover:text-red-600 active:text-red-600"
                 size={24}

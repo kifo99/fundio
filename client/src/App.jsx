@@ -1,8 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigation } from './components/navigation/Navigation';
-import { Login } from './pages/auth/login/Login';
-import { Signup } from './pages/auth/signup/Signup';
 import { Auth } from './pages/auth/signup/Auth';
 import { Home } from './pages/home/Home';
 import { Route, Routes } from 'react-router';
@@ -40,8 +38,7 @@ function App() {
       <main className="md:pt-20">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Auth />} />
+          <Route path="/auth" element={<Auth />} />
         </Routes>
       </main>
     </div>

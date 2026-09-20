@@ -1,7 +1,7 @@
 import { Label } from './Label';
 import { Input } from './Input';
 
-export function FormField({ field, placeholder, label, labelStyle, inputStyle, className }) {
+export function FormField({ field, placeholder, inputStyle, className }) {
   return (
     <div className={className}>
       <Input
