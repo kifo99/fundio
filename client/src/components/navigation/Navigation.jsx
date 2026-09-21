@@ -6,7 +6,7 @@ export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="relative md:fixed md:top-0 md:left-0 z-50 w-full min-h-20 bg-white sm:bg-white md:bg-white lg:bg-transparent text-[#807e7e] grid grid-cols-[auto_auto_auto] justify-around items-center transition-colors duration-500 ease-in hover:bg-white">
+    <div className="relative lg:fixed lg:top-0 lg:left-0 z-50 w-full min-h-20 bg-white sm:bg-white lg:bg-transparent text-[#807e7e] grid grid-cols-[auto_auto_auto] justify-around items-center transition-colors duration-500 ease-in hover:bg-white">
       {/* Menu section */}
       <div className="text-inherit">
         <button className="md:hidden" onClick={() => setIsOpen(true)}>
@@ -31,7 +31,7 @@ export function Navigation() {
           </li>
 
           <li className="list-none p-2.5">
-            <Link to="/login">
+            <Link to="/auth">
               <CircleUser
                 className="transition-colors duration-300 ease-in hover:text-red-600 active:text-red-600"
                 size={24}
