@@ -1,4 +1,4 @@
-import { Form } from './components/Form/Form';
+import { Form } from '../../../components/form/Form';
 import { FormField } from '../../../components/form/FormField';
 import { AuthBackground } from './components/AuthBackground';
 import { AuthButton } from './components/AuthButton';
@@ -24,50 +24,53 @@ export function Auth() {
                 transition={{ duration: 0.35, ease: 'easeInOut' }}
                 className="absolute inset-0 h-full flex flex-col justify-normal items-center"
               >
-                <Form
-                  className={
-                    'flex flex-col p-6 w-full h-full justify-normal bg-white items-center text-[#EDE7D9]'
-                  }
-                >
-                  <div className="flex flex-col justify-center items-center mt-12 mb-8 text-green-500">
+                <Form className="flex flex-col p-6 w-full h-full bg-[#FAF8F4] items-center text-[#1C1D1B]">
+                  <div className="flex flex-col justify-center items-center mt-12 mb-8">
                     <h1 className="text-3xl font-bolder">Welcome back!</h1>
                     <h2 className="font-bold">Login to continue to your account.</h2>
                   </div>
-                  <FormField
-                    field={'email'}
-                    placeholder={'Email'}
-                    inputStyle={
-                      'w-full h-14 pl-4 rounded-full shadow-gray-500 shadow-lg bg-gray-200 text-lg text-gray-900 outline-none focus:outline-none focus:ring-0 focus:ring-offset-0 focus:ring-transparent focus:shadow-lg'
-                    }
-                    className={'items-center w-full h-auto sm:h-16 m-4 rounded-full '}
-                  />
-                  <FormField
-                    field={'password'}
-                    placeholder={'Password'}
-                    inputStyle={
-                      'w-full h-14 pl-4 rounded-full shadow-gray-500 shadow-lg bg-gray-200 text-lg text-gray-900 outline-none focus:outline-none focus:ring-0 focus:ring-offset-0 focus:ring-transparent focus:shadow-lg'
-                    }
-                    className={
-                      'items-center w-full h-auto sm:h-16 m-4 rounded-full shadow-gray-500 shadow-lg bg-gray-200 text-lg text-gray-900 '
-                    }
-                  />
+
+                  <div className="flex flex-col w-full gap-4">
+                    <FormField
+                      field={'email'}
+                      placeholder={'Email'}
+                      inputStyle="w-full h-14 px-4 rounded-lg border border-[#E8E4DA] bg-white text-lg outline-none focus:border-[#3D5A45] focus:ring-1 focus:ring-[#3D5A45] transition-colors"
+                      className="w-full"
+                    />
+                    <FormField
+                      field={'password'}
+                      placeholder={'Password'}
+                      inputStyle="w-full h-14 px-4 rounded-lg border border-[#E8E4DA] bg-white text-lg outline-none focus:border-[#3D5A45] focus:ring-1 focus:ring-[#3D5A45] transition-colors"
+                      className="w-full"
+                    />
+                  </div>
 
                   <AuthButton
-                    className={
-                      'w-2/3 bg-gradient-to-r  from-cyan-400 to-green-500 rounded-full h-14 mt-10 font-bold text-2xl shadow-green-300 shadow-lg'
-                    }
+                    className="w-full bg-[#3D5A45] hover:bg-[#324A39] transition-colors rounded-xl h-14 mt-8 font-medium text-lg text-white"
                     type={'Login'}
                   />
 
-                  <span className="text-gray-900 text-lg mt-12">
+                  <span className="text-[#6B6B63] text-base mt-12">
                     Create account!{' '}
                     <button
-                      className="italic text-xl text-green-600"
+                      className="text-[#3D5A45] font-medium underline underline-offset-2"
                       onClick={() => setMode('signup')}
                     >
                       Signup
                     </button>
                   </span>
+
+                  <div className="flex flex-col items-center w-full mt-10">
+                    <div className="flex items-center w-full gap-3 mb-6">
+                      <div className="h-px flex-1 bg-[#E8E4DA]" />
+                      <span className="text-sm text-[#6B6B63]">or continue with</span>
+                      <div className="h-px flex-1 bg-[#E8E4DA]" />
+                    </div>
+                    <button className="flex items-center justify-center gap-2 w-full h-12 rounded-xl border border-[#E8E4DA] bg-white hover:bg-[#F4F1EA] transition-colors">
+                      <img src="/img/icons/icons8-google-48.png" alt="Google" className="w-5 h-5" />
+                      <span className="text-[#1C1D1B] font-medium">Google</span>
+                    </button>
+                  </div>
                 </Form>
               </motion.div>
             ) : (
@@ -79,69 +82,73 @@ export function Auth() {
                 transition={{ duration: 0.35, ease: 'easeInOut' }}
                 className="absolute inset-0 h-full flex flex-col justify-center items-center"
               >
-                <Form
-                  className={
-                    'flex flex-col p-6 w-full h-auto justify-center items-center text-[#EDE7D9]'
-                  }
-                >
-                  <div className="m-3.5">
-                    <h1 className="uppercase text-3xl font-bold">Create Account</h1>
+                <Form className="flex flex-col p-6 w-full h-full bg-[#FAF8F4] items-center text-[#1C1D1B]">
+                  <div className="flex flex-col justify-center items-center mt-12 mb-8">
+                    <h1 className="text-3xl font-bolder">Create an account!!</h1>
                   </div>
-                  <FormField
-                    field={'firstName'}
-                    placeholder={'First Name'}
-                    label={'Enter your first name'}
-                    inputStyle={'bg-[#6F6482] rounded-full w-full h-16 pl-4'}
-                    className={
-                      'flex flex-col justify-center items-center w-full h-auto sm:h-16 mt-4 mb-8'
-                    }
+
+                  <div className="flex flex-col w-full gap-4">
+                    <div className="flex w-full">
+                      <FormField
+                        field={'firstName'}
+                        placeholder={'First name'}
+                        inputStyle="w-full h-14 px-4 rounded-l-lg border border-r-0 border-[#E8E4DA] bg-white text-lg outline-none focus:border-[#3D5A45] focus:ring-1 focus:ring-[#3D5A45] focus:z-10 transition-colors"
+                        className="w-1/2"
+                      />
+                      <FormField
+                        field={'lastName'}
+                        placeholder={'Last name'}
+                        inputStyle="w-full h-14 px-4 rounded-r-lg border border-[#E8E4DA] bg-white text-lg outline-none focus:border-[#3D5A45] focus:ring-1 focus:ring-[#3D5A45] focus:z-10 transition-colors"
+                        className="w-1/2"
+                      />
+                    </div>
+                    <FormField
+                      field={'email'}
+                      placeholder={'Email'}
+                      inputStyle="w-full h-14 px-4 rounded-lg border border-[#E8E4DA] bg-white text-lg outline-none focus:border-[#3D5A45] focus:ring-1 focus:ring-[#3D5A45] transition-colors"
+                      className="w-full"
+                    />
+                    <FormField
+                      field={'password'}
+                      placeholder={'Password'}
+                      inputStyle="w-full h-14 px-4 rounded-lg border border-[#E8E4DA] bg-white text-lg outline-none focus:border-[#3D5A45] focus:ring-1 focus:ring-[#3D5A45] transition-colors"
+                      className="w-full"
+                    />
+                    <FormField
+                      field={'confirmPassword'}
+                      placeholder={'Confirm password'}
+                      inputStyle="w-full h-14 px-4 rounded-lg border border-[#E8E4DA] bg-white text-lg outline-none focus:border-[#3D5A45] focus:ring-1 focus:ring-[#3D5A45] transition-colors"
+                      className="w-full"
+                    />
+                  </div>
+
+                  <AuthButton
+                    className="w-full bg-[#3D5A45] hover:bg-[#324A39] transition-colors rounded-xl h-14 mt-8 font-medium text-lg text-white"
+                    type={'Signup'}
                   />
-                  <FormField
-                    field={'lastName'}
-                    placeholder={'Last Name'}
-                    label={'Enter your last name'}
-                    inputStyle={'bg-[#6F6482] rounded-full w-full h-16 pl-4'}
-                    className={
-                      'flex flex-col justify-center items-center w-full h-auto sm:h-16 mt-4 mb-8'
-                    }
-                  />
-                  <FormField
-                    field={'email'}
-                    placeholder={'Email'}
-                    label={'Enter your email address'}
-                    inputStyle={'bg-[#6F6482] rounded-full w-full h-16 pl-4'}
-                    className={
-                      'flex flex-col justify-center items-center w-full h-auto sm:h-16 mt-4 mb-8'
-                    }
-                  />
-                  <FormField
-                    field={'password'}
-                    placeholder={'Password'}
-                    label={'Enter your password'}
-                    inputStyle={'bg-[#6F6482] rounded-full w-full h-16 pl-4'}
-                    className={
-                      'flex flex-col justify-center items-center w-full h-auto sm:h-16 mt-4 mb-8'
-                    }
-                  />
-                  <FormField
-                    field={'confirmPassword'}
-                    placeholder={'Confirm Password'}
-                    label={'Confirm Password'}
-                    inputStyle={'bg-[#6F6482] rounded-full w-full h-16 pl-4'}
-                    className={
-                      'flex flex-col justify-center items-center w-full h-auto sm:h-16 mt-4 mb-8'
-                    }
-                  />
+
+                  <span className="text-[#6B6B63] text-base mt-12">
+                    Already have an account?{' '}
+                    <button
+                      className="text-[#3D5A45] font-medium underline underline-offset-2"
+                      onClick={() => setMode('login')}
+                    >
+                      Login
+                    </button>
+                  </span>
+
+                  <div className="flex flex-col items-center w-full mt-10">
+                    <div className="flex items-center w-full gap-3 mb-6">
+                      <div className="h-px flex-1 bg-[#E8E4DA]" />
+                      <span className="text-sm text-[#6B6B63]">or continue with</span>
+                      <div className="h-px flex-1 bg-[#E8E4DA]" />
+                    </div>
+                    <button className="flex items-center justify-center gap-2 w-full h-12 rounded-xl border border-[#E8E4DA] bg-white hover:bg-[#F4F1EA] transition-colors">
+                      <img src="/img/icons/icons8-google-48.png" alt="Google" className="w-5 h-5" />
+                      <span className="text-[#1C1D1B] font-medium">Google</span>
+                    </button>
+                  </div>
                 </Form>
-
-                <AuthButton
-                  className={`w-2/4 text-2xl font-bold h-16 text-white bg-red-500 rounded-full uppercase mt-8`}
-                  type={'Signup'}
-                />
-
-                <button onClick={() => setMode('login')} className="mt-8 text-blue-400">
-                  Already have an account? Login
-                </button>
               </motion.div>
             )}
           </AnimatePresence>
