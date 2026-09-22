@@ -5,7 +5,7 @@ import { SignupFormFields } from './SignupFormFields';
 
 export function SignupForm({ onSetMode }) {
   return (
-    <Form className="flex flex-col p-6 w-full h-full bg-[#FAF8F4] items-center text-[#1C1D1B]">
+    <Form className="flex flex-col p-6 w-full h-full bg-[#FAF8F4] md:rounded-2xl md:justify-around items-center text-[#1C1D1B]">
       <div className="flex flex-col justify-center items-center mt-12 mb-8">
         <h1 className="text-3xl font-bolder">Create an account!!</h1>
       </div>

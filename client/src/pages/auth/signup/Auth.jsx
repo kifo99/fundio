@@ -1,13 +1,8 @@
+import { useMediaQuery } from '../../../hooks/useMediaQuery.js';
 import { AuthCompact } from './components/AuthCompact';
+import { AuthWide } from './components/AuthWide';
 
 export function Auth() {
-  return (
-    <div className="flex flex-col md:flex-row justify-center items-center h-dvh w-full sm:w-2/3 md:w-1/2 lg:w-1/2 m-auto">
-      <div className="relative h-full w-full flex items-center justify-center overflow-hidden">
-        <div className="relative w-full h-full lg:w-1/2 overflow-hidden">
-          <AuthCompact />
-        </div>
-      </div>
-    </div>
-  );
+  const isWide = useMediaQuery('(min-width: 1024px)');
+  return isWide ? <AuthWide /> : <AuthCompact />;
 }
