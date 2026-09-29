@@ -3,9 +3,9 @@ import { AuthButton } from './AuthButton';
 import { LoginFormFields } from './LoginFormFields';
 import { SocialAuth } from './SocialAuth';
 
-export function LoginForm({ onSetMode }) {
+export function LoginForm({ className, onSetMode = null }) {
   return (
-    <Form className="flex flex-col p-6 w-full h-full bg-[#FAF8F4] md:rounded-2xl md:justify-around items-center text-[#1C1D1B]">
+    <Form className={className}>
       <div className="flex flex-col justify-center items-center mt-12 mb-8">
         <h1 className="text-3xl font-bolder">Welcome back!</h1>
         <h2 className="font-bold">Login to continue to your account.</h2>

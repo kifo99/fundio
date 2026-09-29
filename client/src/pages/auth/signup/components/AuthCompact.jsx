@@ -19,7 +19,12 @@ export function AuthCompact() {
                 transition={{ duration: 0.35, ease: 'easeInOut' }}
                 className="h-full flex flex-col justify-normal items-center"
               >
-                <LoginForm onSetMode={setMode} />
+                <LoginForm
+                  className={
+                    'flex flex-col p-6 w-full h-full bg-[#FAF8F4] md:rounded-2xl md:justify-around items-center text-[#1C1D1B]'
+                  }
+                  onSetMode={setMode}
+                />
               </motion.div>
             ) : (
               <motion.div
@@ -30,7 +35,12 @@ export function AuthCompact() {
                 transition={{ duration: 0.35, ease: 'easeInOut' }}
                 className="absolute inset-0 h-full flex flex-col justify-center items-center"
               >
-                <SignupForm onSetMode={setMode} />
+                <SignupForm
+                  className={
+                    'flex flex-col p-6 w-full h-full bg-[#FAF8F4] md:rounded-2xl md:justify-around items-center text-[#1C1D1B]'
+                  }
+                  onSetMode={setMode}
+                />
               </motion.div>
             )}
           </AnimatePresence>

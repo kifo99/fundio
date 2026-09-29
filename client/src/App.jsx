@@ -35,7 +35,7 @@ function App() {
   return (
     <div>
       <Navigation />
-      <main className="pt-20 md:pt-0">
+      <main className="pt-20 md:pt-0 lg:pt-20">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/auth" element={<Auth />} />
