@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { PURGE } from 'redux-persist';
 
-const sessionDuration = parseInt(import.meta.env.SESSION_DURATION, 10);
+// const sessionDuration = parseInt(import.meta.env.SESSION_DURATION, 10);
 
 const initialState = {
   userId: null,
@@ -15,7 +15,6 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    // TODO Create the rest of set functions (setLoading, setIsAuth, setError, setSuccess)
     setUserId: (state, action) => {
       state.userId = action.payload;
       console.log(`State set userId: ${JSON.stringify(state.userId)}`);
@@ -36,7 +35,7 @@ const authSlice = createSlice({
     setLoginTime: (state) => {
       state.loginTime = new Date().getTime();
     },
-    logout: (state) => {
+    logout: () => {
       return initialState;
     },
   },
@@ -48,12 +47,6 @@ const authSlice = createSlice({
 });
 
 // TODO export the rest of actions
-export const {
-  setUserId,
-  setUserToken,
-  setIsAuth,
-  setSuccess,
-  setLoginTime,
-  logout,
-} = authSlice.actions;
+export const { setUserId, setUserToken, setIsAuth, setSuccess, setError, setLoginTime, logout } =
+  authSlice.actions;
 export default authSlice.reducer;

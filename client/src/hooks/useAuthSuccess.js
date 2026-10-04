@@ -5,7 +5,7 @@ import {
   setSuccess,
   setUserId,
   setUserToken,
-} from '../../store/authSlice.js';
+} from '../store/authSlice.js';
 import { useNavigate } from 'react-router';
 
 export function useAuthSuccess() {
