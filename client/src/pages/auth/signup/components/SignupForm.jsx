@@ -2,10 +2,12 @@ import { Form } from '../../../../components/form/Form';
 import { AuthButton } from './AuthButton';
 import { SocialAuth } from './SocialAuth';
 import { SignupFormFields } from './SignupFormFields';
+import { useSignup } from '../../../../queries/auth.queries.js';
 
 export function SignupForm({ className, onSetUserInput, onSetMode = null }) {
+  const signup = useSignup();
   return (
-    <Form className={className} onSetUserInput={onSetUserInput}>
+    <Form className={className} mutation={signup} onSetUserInput={onSetUserInput}>
       <div className="flex flex-col justify-center items-center mt-12 mb-8">
         <h1 className="text-3xl font-bolder">Create an account!!</h1>
       </div>

@@ -1,11 +1,14 @@
 import { Form } from '../../../../components/form/Form';
 import { AuthButton } from './AuthButton';
 import { LoginFormFields } from './LoginFormFields';
-import { SocialAuth } from './SocialAuth';
+import { SocialAuth } from './SocialAuth.jsx';
+import { useLogin } from '../../../../queries/auth.queries.js';
 
-export function LoginForm({ className, onSetMode = null }) {
+export function LoginForm({ className, onSetUserInput, onSetMode = null }) {
+  const login = useLogin();
+
   return (
-    <Form className={className}>
+    <Form className={className} mutation={login} onSetUserInput={onSetUserInput}>
       <div className="flex flex-col justify-center items-center mt-12 mb-8">
         <h1 className="text-3xl font-bolder">Welcome back!</h1>
         <h2 className="font-bold">Login to continue to your account.</h2>
