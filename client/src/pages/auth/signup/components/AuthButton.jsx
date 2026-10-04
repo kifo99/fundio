@@ -1,3 +1,7 @@
 export function AuthButton({ className, type }) {
-  return <button className={`${className}`}>{type}</button>;
+  return (
+    <button type={`${type}`} className={`${className}`}>
+      {type}
+    </button>
+  );
 }
