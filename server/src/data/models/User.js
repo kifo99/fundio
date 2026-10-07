@@ -21,7 +21,7 @@ export default class User extends Model {
         lastName: { type: 'string' },
         email: { type: 'string', format: 'email' },
         password: { type: 'string' }, // needs to be stored hashed
-        role: { type: 'string', enum: ['user', 'admin', 'vendor'] },
+        role: { type: 'string', enum: ['User', 'Admin', 'Vendor'] },
         createdAt: { type: 'string', format: 'date-time' },
         profilePic: { type: 'string' },
         emailVerified: { type: 'boolean' },
