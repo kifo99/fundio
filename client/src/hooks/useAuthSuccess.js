@@ -7,7 +7,7 @@ export function useAuthSuccess() {
   const navigate = useNavigate();
 
   return (data) => {
-    dispatch(setCredentials(data.user));
+    dispatch(setCredentials(data));
     navigate('/');
   };
 }
