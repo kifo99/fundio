@@ -3,8 +3,8 @@ import ApiError from '../utils/ApiError.js';
 import catchAsync from '../utils/catchAsync.js';
 import { validationResult } from 'express-validator';
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 import 'dotenv/config';
+import { signToken } from '../utils/signToken.js';
 
 // signup function
 export const signup = catchAsync(async (req, res, next) => {
@@ -20,16 +20,9 @@ export const signup = catchAsync(async (req, res, next) => {
     lastName: lastName,
     email: email,
     password: hashedPassword,
+    role: 'user',
   });
-  const token = jwt.sign(
-    {
-      email: user.email,
-      userId: user.id,
-      role: user.role,
-    },
-    process.env.SECRET_KEY,
-    { expiresIn: '1h' },
-  );
+  const token = signToken(user);
 
   const { password: _pw, ...safeUser } = user;
 
@@ -48,25 +41,17 @@ export const login = catchAsync(async (req, res, next) => {
   if (!errors.isEmpty()) throw new ApiError(formattedErrors.array(), 400);
 
   const user = await User.query().findOne({ email });
-  if (!user) throw new ApiError('User has not been found', 404);
+  const valid = user && (await bcrypt.compare(password, user.password));
+  if (!valid) throw new ApiError('Invalid email or password', 401);
 
-  const decryptedPassword = await bcrypt.compare(password, user.password);
+  const token = signToken(user);
 
-  if (!decryptedPassword) throw new ApiError('Wrong password!', 400);
-
-  const token = jwt.sign(
-    {
-      email: user.email,
-      userId: user.id,
-    },
-    process.env.SECRET_KEY,
-    { expiresIn: '1h' },
-  );
+  const { password: _pw, ...safeUser } = user;
 
   res.status(200).json({
     message: `Welcome: ${user.firstName}`,
-    token: token,
-    user: user,
+    token,
+    user: safeUser,
     userId: user.id,
   });
 });
