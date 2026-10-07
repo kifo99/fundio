@@ -20,7 +20,7 @@ export const signup = catchAsync(async (req, res, next) => {
     lastName: lastName,
     email: email,
     password: hashedPassword,
-    role: 'user',
+    role: 'User',
   });
   const token = signToken(user);
 
