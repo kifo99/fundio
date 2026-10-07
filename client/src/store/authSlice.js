@@ -6,6 +6,8 @@ import { PURGE } from 'redux-persist';
 const initialState = {
   userId: null,
   userToken: null,
+  role: null,
+  vendorStatus: null,
   isAuth: false,
   error: null,
   success: false,
@@ -15,25 +17,25 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setUserId: (state, action) => {
-      state.userId = action.payload;
-      console.log(`State set userId: ${JSON.stringify(state.userId)}`);
-    },
-    setUserToken: (state, action) => {
-      state.userToken = action.payload;
-      console.log(`State set userToken: ${state.userToken}`);
-    },
-    setIsAuth: (state) => {
+    setCredentials: (state, action) => {
+      const { token, user } = action.payload;
+
+      state.userToken = token;
+      state.userId = user.id;
+      state.role = user.role;
+      state.vendorStatus = user.vendorStatus ?? null;
       state.isAuth = true;
-    },
-    setSuccess: (state) => {
       state.success = true;
+      state.error = null;
+      state.loginTime = Date.now();
     },
+
     setError: (state, action) => {
       state.error = action.payload;
+      state.success = false;
     },
-    setLoginTime: (state) => {
-      state.loginTime = new Date().getTime();
+    clearError: (state) => {
+      state.error = null;
     },
     logout: () => {
       return initialState;
@@ -47,6 +49,5 @@ const authSlice = createSlice({
 });
 
 // TODO export the rest of actions
-export const { setUserId, setUserToken, setIsAuth, setSuccess, setError, setLoginTime, logout } =
-  authSlice.actions;
+export const { setCredentials, setError, clearError, logout } = authSlice.actions;
 export default authSlice.reducer;
