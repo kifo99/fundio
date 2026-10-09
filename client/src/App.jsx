@@ -5,6 +5,7 @@ import { Auth } from './pages/auth/signup/Auth';
 import { Home } from './pages/home/Home';
 import { Route, Routes } from 'react-router';
 import { persistor } from './store/store';
+import { Toaster } from 'sonner';
 
 function App() {
   const isAuth = useSelector((state) => state.auth.isAuth);
@@ -41,6 +42,7 @@ function App() {
           <Route path="/auth" element={<Auth />} />
         </Routes>
       </main>
+      <Toaster />
     </div>
   );
 }

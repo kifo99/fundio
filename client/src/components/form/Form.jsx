@@ -3,6 +3,7 @@ import { setError, clearError } from '../../store/authSlice.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { getErrorMessages } from '../../utils/getErrorMessages.js';
 import { useEffect } from 'react';
+import { notify } from '../../utils/notify.jsx';
 
 export function Form({ className, mutation, onSetUserInput, children }) {
   const onAuthSuccess = useAuthSuccess();
@@ -11,6 +12,13 @@ export function Form({ className, mutation, onSetUserInput, children }) {
   useEffect(() => {
     dispatch(clearError());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (!error) return;
+
+    [].concat(error).forEach((msg) => notify.error(msg));
+  }, [error]);
+
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -29,13 +37,6 @@ export function Form({ className, mutation, onSetUserInput, children }) {
   return (
     <form onSubmit={handleSubmit} className={`${className}`}>
       {children}
-      {error && (
-        <ul role="alert" className="form-errors">
-          {[].concat(error).map((msg, i) => (
-            <li key={i}>{msg}</li>
-          ))}
-        </ul>
-      )}
     </form>
   );
 }
