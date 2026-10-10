@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useMutation } from '@tanstack/react-query';
 import store from '../store/store.js';
 import { logout } from '../store/authSlice.js';
+import { notify } from '../utils/notify.jsx';
 
 export const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL ?? 'http://localhost:8080',
@@ -30,6 +31,7 @@ export const useLogin = () => {
     mutationFn: login,
     onSuccess: (data) => {
       console.log('User logged in!', data);
+      notify.success('User logged in!');
 
       return data;
     },
@@ -44,6 +46,8 @@ export const useSignup = () => {
     mutationFn: signup,
     onSuccess: (data) => {
       console.log('User signed up!', data);
+      notify.success('User logged in!');
+
       return data;
     },
     onError: (error) => {
