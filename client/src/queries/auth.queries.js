@@ -44,6 +44,7 @@ export const useSignup = () => {
     mutationFn: signup,
     onSuccess: (data) => {
       console.log('User signed up!', data);
+
       return data;
     },
     onError: (error) => {
