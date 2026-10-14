@@ -27,7 +27,6 @@ export const useLogin = () => {
   return useMutation({
     mutationFn: login,
     onSuccess: (data) => {
-      console.log('User logged in!', data);
       notify.success('User logged in!');
 
       return data;
@@ -42,7 +41,6 @@ export const useSignup = () => {
   return useMutation({
     mutationFn: signup,
     onSuccess: (data) => {
-      console.log('User signed up!', data);
       notify.success('User logged in!');
       return data;
     },
@@ -52,14 +50,13 @@ export const useSignup = () => {
   });
 };
 
-export const useMe = () => {
+export const useMe = () =>
   useQuery({
     queryKey: ['me'],
     queryFn: getMe,
     retry: false,
     staleTime: 5 * 60 * 1000,
   });
-};
 
 export const useLogout = () => {
   return useMutation({
