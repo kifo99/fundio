@@ -66,3 +66,19 @@ export const login = catchAsync(async (req, res, next) => {
     user: safeUser,
   });
 });
+
+export const logout = catchAsync(async (req, res, next) => {
+  res.clearCookie('token', {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+  });
+
+  res.status(200).json({ message: 'Logged out' });
+});
+
+export const me = catchAsync(async (req, res, next) => {
+  const { password, ...safeUser } = req.user;
+
+  res.status(200).json({ user: safeUser });
+});
