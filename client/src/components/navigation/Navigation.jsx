@@ -1,9 +1,11 @@
-import { Menu, Globe, CircleUser, ShoppingBasket, X } from 'lucide-react';
+import { Menu, Globe, CircleUser, ShoppingBasket, X, Logs } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router';
+import { useSelector } from 'react-redux';
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const isAuth = useSelector((state) => state.auth.isAuth);
 
   return (
     <div className="relative lg:fixed lg:top-0 lg:left-0 z-50 w-full min-h-20 bg-white sm:bg-white lg:bg-transparent text-[#807e7e] grid grid-cols-[auto_auto_auto] justify-around items-center transition-colors duration-500 ease-in hover:bg-white">
@@ -73,12 +75,21 @@ export function Navigation() {
           </li>
 
           <li className="flex items-center gap-3">
-            <Link to="/auth" onClick={() => setIsOpen(false)}>
-              <CircleUser
-                className="transition-colors duration-300 ease-in hover:text-red-600 active:text-red-600"
-                size={24}
-              />
-            </Link>
+            {!isAuth ? (
+              <Link to="/auth" onClick={() => setIsOpen(false)}>
+                <CircleUser
+                  className="transition-colors duration-300 ease-in hover:text-red-600 active:text-red-600"
+                  size={24}
+                />
+              </Link>
+            ) : (
+              <Link to="/auth" onClick={() => setIsOpen(false)}>
+                <Logs
+                  className="transition-colors duration-300 ease-in hover:text-red-600 active:text-red-600"
+                  size={24}
+                />
+              </Link>
+            )}
           </li>
           <li className="flex items-center gap-3">
             <Link to="cart" onClick={() => setIsOpen(false)}>

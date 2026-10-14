@@ -47,7 +47,6 @@ export const useSignup = () => {
     onSuccess: (data) => {
       console.log('User signed up!', data);
       notify.success('User logged in!');
-
       return data;
     },
     onError: (error) => {
