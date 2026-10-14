@@ -1,6 +1,6 @@
-import User from '../data/models/User';
-import ApiError from '../utils/ApiError';
-import catchAsync from '../utils/catchAsync';
+import User from '../data/models/User.js';
+import ApiError from '../utils/ApiError.js';
+import catchAsync from '../utils/catchAsync.js';
 import jwt from 'jsonwebtoken';
 
 export const protect = catchAsync(async (req, res, next) => {
