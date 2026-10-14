@@ -8,6 +8,7 @@ import { AuthBanner } from './AuthBanner.jsx';
 
 export function AuthWide() {
   const [isActive, setIsActive] = useState(false);
+  const [isVendor, setIsVendor] = useState(false);
   const [userInput, setUserInput] = useState({
     firstName: '',
     lastName: '',
