@@ -4,6 +4,7 @@ import catchAsync from '../utils/catchAsync.js';
 import jwt from 'jsonwebtoken';
 
 export const protect = catchAsync(async (req, res, next) => {
+  console.log(req.cookies.token);
   const token = req.cookies.token;
   if (!token) throw new ApiError('Not authenticated', 401);
 

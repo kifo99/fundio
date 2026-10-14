@@ -12,12 +12,14 @@ import productRouter from './routes/product.js';
 import cartRouter from './routes/cart.js';
 import cartItemsRouter from './routes/cartItems.js';
 import errorHandler from './middleware/errorHandler.js';
+import cookieParser from 'cookie-parser';
 const app = express();
 
 app.use(helmet());
 app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 app.use(morgan('dev'));
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
