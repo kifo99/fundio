@@ -52,7 +52,7 @@ route.post(
 
 route.post('/login', login);
 
-route.get('/me', me);
+route.get('/me', protect, me);
 
-route.post('/logout', protect, logout);
+route.post('/logout', logout);
 export default route;
