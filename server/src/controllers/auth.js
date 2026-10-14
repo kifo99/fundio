@@ -24,11 +24,17 @@ export const signup = catchAsync(async (req, res, next) => {
   });
   const token = signToken(user);
 
+  res.cookie('token', token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    maxAge: 24 * 60 * 60 * 1000,
+  });
+
   const { password: _pw, ...safeUser } = user;
 
   res.status(201).json({
-    message: 'User account is created successfully.',
-    token,
+    message: `Welcome: ${user.firstName}`,
     user: safeUser,
   });
 });
@@ -46,12 +52,17 @@ export const login = catchAsync(async (req, res, next) => {
 
   const token = signToken(user);
 
+  res.cookie('token', token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    maxAge: 24 * 60 * 60 * 1000,
+  });
+
   const { password: _pw, ...safeUser } = user;
 
-  res.status(200).json({
+  res.status(201).json({
     message: `Welcome: ${user.firstName}`,
-    token,
     user: safeUser,
-    userId: user.id,
   });
 });
