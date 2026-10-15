@@ -1,5 +1,6 @@
 import { Model } from 'objection';
 import User from './User.js';
+import { CATEGORIES } from '../../helpers/categories.js';
 
 export default class Product extends Model {
   static get tableName() {
@@ -21,6 +22,7 @@ export default class Product extends Model {
         'description',
         'vendorId',
         'discount',
+        'category',
       ],
 
       properties: {
@@ -31,6 +33,7 @@ export default class Product extends Model {
         price: { type: 'number' },
         discount: { type: 'number' },
         description: { type: 'string', minLength: 100, maxLength: 250 },
+        category: { type: 'string', enum: CATEGORIES },
       },
     };
   }
