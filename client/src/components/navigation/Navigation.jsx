@@ -33,12 +33,21 @@ export function Navigation() {
           </li>
 
           <li className="list-none p-2.5">
-            <Link to="/auth">
-              <CircleUser
-                className="transition-colors duration-300 ease-in hover:text-red-600 active:text-red-600"
-                size={24}
-              />
-            </Link>
+            {!isAuth ? (
+              <Link to="/auth" onClick={() => setIsOpen(false)}>
+                <CircleUser
+                  className="transition-colors duration-300 ease-in hover:text-red-600 active:text-red-600"
+                  size={24}
+                />
+              </Link>
+            ) : (
+              <Link to="/auth" onClick={() => setIsOpen(false)}>
+                <Logs
+                  className="transition-colors duration-300 ease-in hover:text-red-600 active:text-red-600"
+                  size={24}
+                />
+              </Link>
+            )}
           </li>
           <li className="list-none p-2.5">
             <Link to="cart">
@@ -75,21 +84,12 @@ export function Navigation() {
           </li>
 
           <li className="flex items-center gap-3">
-            {!isAuth ? (
-              <Link to="/auth" onClick={() => setIsOpen(false)}>
-                <CircleUser
-                  className="transition-colors duration-300 ease-in hover:text-red-600 active:text-red-600"
-                  size={24}
-                />
-              </Link>
-            ) : (
-              <Link to="/auth" onClick={() => setIsOpen(false)}>
-                <Logs
-                  className="transition-colors duration-300 ease-in hover:text-red-600 active:text-red-600"
-                  size={24}
-                />
-              </Link>
-            )}
+            <Link to="/auth" onClick={() => setIsOpen(false)}>
+              <CircleUser
+                className="transition-colors duration-300 ease-in hover:text-red-600 active:text-red-600"
+                size={24}
+              />
+            </Link>
           </li>
           <li className="flex items-center gap-3">
             <Link to="cart" onClick={() => setIsOpen(false)}>
