@@ -8,6 +8,6 @@ export function signToken(user) {
       role: user.role,
     },
     process.env.SECRET_KEY,
-    { expiresIn: '1h' },
+    { expiresIn: '24h' },
   );
 }
