@@ -1,3 +1,5 @@
+import { Link } from 'react-router';
+
 export function NavTitle({ className = '' }) {
   return (
     <div>
