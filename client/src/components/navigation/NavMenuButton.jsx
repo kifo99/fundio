@@ -1,3 +1,5 @@
+import { Menu } from 'lucide-react';
+
 export function NavMenuButton({ onSetIsOpen }) {
   return (
     <div className="text-inherit">
