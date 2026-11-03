@@ -3,6 +3,18 @@ import Product from '../data/models/Product.js';
 import ApiError from '../utils/ApiError.js';
 import catchAsync from '../utils/catchAsync.js';
 
+export const getProducts = catchAsync(async (req, res, next) => {
+  const products = await Product.query();
+
+  const productsByCategory = Object.groupBy(products, (product) => product.category);
+  // console.log(`products: ${JSON.stringify(products, null, 2)}`);
+
+  res.status(200).json({
+    message: 'All products',
+    products: productsByCategory,
+  });
+});
+
 // Controller for product route that retrieves products vendor created
 export const getVendorsProducts = catchAsync(async (req, res, next) => {
   const vendorId = req.user.userId;
