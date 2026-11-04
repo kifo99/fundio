@@ -3,11 +3,13 @@ import Product from '../data/models/Product.js';
 import ApiError from '../utils/ApiError.js';
 import catchAsync from '../utils/catchAsync.js';
 
-export const getProducts = catchAsync(async (req, res, next) => {
+export const getProductsByCategory = catchAsync(async (req, res, next) => {
   const products = await Product.query();
 
+  const categories = [...new Set(products.map((prod) => prod.category))];
+  console.log(categories);
   const productsByCategory = Object.groupBy(products, (product) => product.category);
-  // console.log(`products: ${JSON.stringify(products, null, 2)}`);
+  console.log(typeof products);
 
   res.status(200).json({
     message: 'All products',
