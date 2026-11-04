@@ -7,7 +7,7 @@ import { BackdropOverlay } from './BackdropOverlay';
 import { MobileNavLinks } from './MobileNavLinks';
 import { NavMenuButton } from './NavMenuButton';
 import { NavTitle } from './NavTitle';
-export function Navigation() {
+export function Navigation({ onSetIsDrawerOpen }) {
   const [isOpen, setIsOpen] = useState(false);
   const isAuth = useSelector((state) => state.auth.isAuth);
 
@@ -15,11 +15,19 @@ export function Navigation() {
     <div className="relative lg:fixed lg:top-0 lg:left-0 z-50 w-full min-h-20 bg-white sm:bg-white lg:bg-transparent text-[#807e7e] grid grid-cols-[auto_auto_auto] justify-around items-center transition-colors duration-500 ease-in hover:bg-white">
       <NavMenuButton onSetIsOpen={setIsOpen} />
       <NavTitle />
-      <DesktopNavLinks onSetIsOpen={setIsOpen} isAuth={isAuth} />
+      <DesktopNavLinks
+        onSetIsOpen={setIsOpen}
+        onSetIsDrawerOpen={onSetIsDrawerOpen}
+        isAuth={isAuth}
+      />
 
       <BackdropOverlay onSetIsOpen={setIsOpen} isOpen={isOpen} />
 
-      <MobileNavLinks onSetIsOpen={setIsOpen} isOpen={isOpen} />
+      <MobileNavLinks
+        onSetIsOpen={setIsOpen}
+        onSetIsDrawerOpen={onSetIsDrawerOpen}
+        isOpen={isOpen}
+      />
     </div>
   );
 }
