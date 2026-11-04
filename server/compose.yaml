@@ -3,16 +3,21 @@ services:
     build: .
     ports:
       - '8080:8080'
+    environment:
+      NODE_ENV: development
+      DATABASE_URL_DEV: ${DATABASE_URL_DOCKER}
     command: npm start
+
   database:
-    image: 'postgres:latest'
+    image: postgres:latest
     ports:
-      - 5432:5432
+      - '5432:5432'
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: pass
       POSTGRES_DB: db
     volumes:
       - postgres_data:/var/lib/postgresql
+
 volumes:
   postgres_data:
