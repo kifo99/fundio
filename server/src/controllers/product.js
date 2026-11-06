@@ -6,14 +6,16 @@ import catchAsync from '../utils/catchAsync.js';
 export const getProductsByCategory = catchAsync(async (req, res, next) => {
   const products = await Product.query();
 
-  const categories = [...new Set(products.map((prod) => prod.category))];
-  console.log(categories);
   const productsByCategory = Object.groupBy(products, (product) => product.category);
-  console.log(typeof products);
+
+  const categories = Object.entries(productsByCategory).map(([category, products]) => ({
+    category,
+    products,
+  }));
 
   res.status(200).json({
     message: 'All products',
-    products: productsByCategory,
+    products: categories,
   });
 });
 
