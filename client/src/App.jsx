@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Navigation } from './components/navigation/Navigation';
 import { Auth } from './pages/auth/signup/Auth';
 import { Home } from './pages/home/Home';
+import { Category } from './pages/product/Category';
 import { Route, Routes } from 'react-router';
 import { Toaster } from 'sonner';
 import { useMe } from './queries/auth.queries';
@@ -36,6 +37,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/auth" element={<Auth />} />
+            <Route path="/category" element={<Category />} />
           </Routes>
         )}
       </main>

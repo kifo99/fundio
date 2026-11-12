@@ -1,13 +1,8 @@
-import axios from 'axios';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import store from '../store/store.js';
 import { logout } from '../store/authSlice.js';
 import { notify } from '../utils/notify.jsx';
-
-export const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL ?? 'http://localhost:8080',
-  withCredentials: true,
-});
+import { api } from '../lib/api.js';
 
 api.interceptors.response.use(
   (res) => res,
