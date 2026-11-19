@@ -6,7 +6,6 @@ import { Model } from 'objection';
 import knex from '../config/config.js';
 import User from '../data/models/User.js';
 import Product from '../data/models/Product.js';
-import knexConfig from '../config/config.js';
 
 import { TEMPLATES } from '../helpers/templates.js';
 import { CATEGORIES } from '../helpers/categories.js';
@@ -32,6 +31,9 @@ const VARIANTS = [
   'Limited',
 ];
 
+// Simulates vendor-made tags that are not in the curated list
+const CUSTOM_TAGS = ['gift-idea', 'eco-friendly', 'local', 'limited-edition', 'bestseller'];
+
 for (const c of CATEGORIES) {
   if (!TEMPLATES[c]?.length) throw new Error(`No template for category ${c} in templates.js`);
 }
@@ -41,8 +43,6 @@ const slugify = (s) =>
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/(^-|-$)/g, '');
-
-const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 
 function makeVendor(i) {
   return {
@@ -55,6 +55,17 @@ function makeVendor(i) {
     emailVerified: true,
   };
 }
+
+function makeTags(template) {
+  const tags = [...(template.tags ?? [])];
+  // ~30% of products also get a custom vendor tag (max 5 tags total)
+  if (tags.length < 5 && faker.datatype.boolean(0.3)) {
+    const extra = faker.helpers.arrayElement(CUSTOM_TAGS);
+    if (!tags.includes(extra)) tags.push(extra);
+  }
+  return tags;
+}
+
 function makeProducts(i) {
   const vendorKey = `vendor${i + 1}`;
 
@@ -81,6 +92,7 @@ function makeProducts(i) {
     products.push({
       productName,
       category,
+      tags: makeTags(t),
       price: faker.number.float({ min, max, fractionDigits: 2 }),
       discount: faker.helpers.arrayElement([0, 0, 0, 0, 0, 0, 0, 10, 15, 20, 25]),
       description: t.description,
@@ -92,11 +104,12 @@ function makeProducts(i) {
 
 async function main() {
   try {
-    // Wipe previous seed data (products first, then users)
+    // Wipe ALL products (not just seeded ones), then previous seed users
+    await knex('product').del();
+
     const like = `%@${EMAIL_DOMAIN}`;
     const oldIds = await knex('user').where('email', 'like', like).pluck('id');
     if (oldIds.length) {
-      await knex('product').whereIn('vendorId', oldIds).del();
       await knex('user').whereIn('id', oldIds).del();
     }
 
