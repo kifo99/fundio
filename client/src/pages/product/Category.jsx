@@ -5,7 +5,6 @@ import { CategoryHeader } from '../../components/products/CategoryHeader';
 export function Category() {
   const location = useLocation();
 
-  // TODO return main component for category page figure out the name
   const { category } = location.state || {};
   const { products } = category || {};
 
@@ -20,14 +19,15 @@ export function Category() {
     toys: 'bg-toys',
     beauty: 'bg-beauty',
     garden: 'bg-garden',
+    carpentry: 'bg-carpentry',
   };
 
   const key = category?.category?.toString().trim().toLowerCase();
   const bgClass = categoryBg[key];
   return (
     <>
-      <div className={`${bgClass} bg-cover bg-center bg-no-repeat pt-20 w-full min-h-screen`}>
-        <CategoryHeader title={category.category} />
+      <div className="pt-20 w-full min-h-screen">
+        <CategoryHeader title={category.category} bg={bgClass} />
       </div>
     </>
   );
