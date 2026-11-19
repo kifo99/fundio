@@ -1,6 +1,7 @@
 import { Model } from 'objection';
 import User from './User.js';
 import { CATEGORIES } from '../../helpers/categories.js';
+import { type } from 'node:os';
 
 export default class Product extends Model {
   static get tableName() {
@@ -23,6 +24,7 @@ export default class Product extends Model {
         'vendorId',
         'discount',
         'category',
+        'tags',
       ],
 
       properties: {
@@ -34,6 +36,11 @@ export default class Product extends Model {
         discount: { type: 'number' },
         description: { type: 'string', minLength: 100, maxLength: 250 },
         category: { type: 'string', enum: CATEGORIES },
+        tags: {
+          type: 'array',
+          items: { type: 'string', minLength: 1, maxLength: 5 },
+          uniqueItems: true,
+        },
       },
     };
   }
