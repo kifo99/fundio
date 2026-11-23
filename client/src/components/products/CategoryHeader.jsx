@@ -1,15 +1,15 @@
-import { Banner } from '../ui/Banner';
+import { CategoryList } from './CategoryList';
 
-export function CategoryHeader({ title, bg }) {
+// Category header Layout:
+//  - Title of category
+//  - Display active categories and other categories
+export function CategoryHeader({ title }) {
   return (
-    <div
-      className={`${bg} bg-cover bg-center bg-no-repeat w-full grid grid-rows-2 gap-3.5 justify-center pt-20  transition delay-200 duration-1000 ease-in-out hover:text-red-500 `}
-    >
-      <Banner
-        className={'text-[#d7eef2] text-shadow-lg/40 text-shadow-[#0d1416]'}
-        title={title}
-        subtitle={'Unique pieces from our hands to your home'}
-      />
+    <div className={`w-full grid grid-rows-2 gap-3.5 justify-center pt-20`}>
+      <h1 className="text-center font-bold uppercase text-5xl transition delay-200 duration-1000 ease-in-out hover:text-red-500">
+        {title}
+      </h1>
+      <CategoryList className={'flex flex-row justify-between text-center text-2xl'} />
     </div>
   );
 }
