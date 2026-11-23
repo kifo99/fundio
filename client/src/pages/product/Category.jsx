@@ -2,32 +2,18 @@
 
 import { useLocation } from 'react-router';
 import { CategoryHeader } from '../../components/products/CategoryHeader';
+import { Divider } from '../../components/ui/Divider';
+import { CategoryContent } from '../../components/products/CategoryContent';
 export function Category() {
   const location = useLocation();
 
   const { category } = location.state || {};
-  const { products } = category || {};
-
-  const categoryBg = {
-    food: 'bg-food',
-    diy: 'bg-diy',
-    crafts: 'bg-crafts',
-    arts: 'bg-arts',
-    homeDecor: 'bg-homeDecore',
-    jewelry: 'bg-jewelry',
-    clothing: 'bg-clothing',
-    toys: 'bg-toys',
-    beauty: 'bg-beauty',
-    garden: 'bg-garden',
-    carpentry: 'bg-carpentry',
-  };
-
-  const key = category?.category?.toString().trim().toLowerCase();
-  const bgClass = categoryBg[key];
   return (
     <>
       <div className="pt-20 w-full min-h-screen">
-        <CategoryHeader title={category.category} bg={bgClass} />
+        <CategoryHeader title={category.category} />
+        <Divider />
+        <CategoryContent />
       </div>
     </>
   );
