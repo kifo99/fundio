@@ -15,7 +15,6 @@ function App() {
   const dispatch = useDispatch();
   const { data, isLoading, isError } = useMe();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [onClose, setOnCLose] = useState(false);
 
   useEffect(() => {
     if (data) dispatch(setCredentials({ user: data.user }));
