@@ -12,7 +12,7 @@ export function Category() {
     <>
       <div className="pt-20 w-full min-h-screen">
         <CategoryHeader title={category.category} />
-        <Divider />
+        <Divider className={'w-[95%] my-15'} />
         <CategoryContent />
       </div>
     </>
